@@ -5,7 +5,7 @@ import com.andrew.eldermind.dto.ChatResponse;
 import com.andrew.eldermind.dto.ChatMessage;
 import org.springframework.stereotype.Service;
 
-// ✅ OpenAI Java SDK imports (v4.9.0)
+// OpenAI Java SDK imports (v4.x)
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.models.ChatModel;
@@ -20,21 +20,20 @@ public class ChatService {
      *
      * Requires:
      *   export OPENAI_API_KEY="sk-xxxx"
-     *
-     * You can also set OPENAI_ORG_ID and OPENAI_PROJECT_ID if you use them,
-     * but only OPENAI_API_KEY is required for basic usage.
      */
     private final OpenAIClient client;
 
     public ChatService() {
-        // This reads OPENAI_API_KEY (and friends) from env or system props
+        // Reads OPENAI_API_KEY (and optional org/project) from env
         this.client = OpenAIOkHttpClient.fromEnv();
     }
 
     /**
-     * Main entry point called by your ChatController.
-     * Takes the incoming ChatRequest, calls the OpenAI Chat Completions API,
-     * and returns a ChatResponse DTO for the frontend.
+     * Main entry point called by ChatController.
+     * - Reads the user's last message from ChatRequest
+     * - Builds a system/developer prompt + user message
+     * - Calls OpenAI Chat Completions API
+     * - Returns a ChatResponse DTO to the frontend
      */
     public ChatResponse getChatResponse(ChatRequest request) {
 
@@ -45,21 +44,27 @@ public class ChatService {
         if (request.getMessages() != null && !request.getMessages().isEmpty()) {
             ChatMessage last = request.getMessages().get(request.getMessages().size() - 1);
             if (last.getContent() != null && !last.getContent().isBlank()) {
-                userContent = last.getContent();
+                userContent = last.getContent();  // <-- what the user actually typed
             }
         }
 
-        
-
         // ------------------------------------------------------------
         // 2. Build ChatCompletionCreateParams for the Chat Completions API
+        //    Here is where we add the *system-style* prompt.
         // ------------------------------------------------------------
-        // For now we send a single user message.
-        // Later we can add system prompts + full conversation history.
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .addUserMessage(userContent)
-                // You can upgrade to GPT_4_1 later if you want more power
                 .model(ChatModel.GPT_4_1_MINI)
+
+                // 👇 SYSTEM / DEVELOPER PROMPT: ElderMind persona
+                .addDeveloperMessage("""
+                    You are ELDERMIND — an Elder Scrolls lore expert.
+                    You speak with an in-universe, scholarly tone and reference
+                    canon sources from TES3, TES4, TES5, ESO, and official writings.
+                    If something is speculative or fan theory, clearly label it as such.
+                    """)
+                // 👇 USER MESSAGE: what came from the frontend
+                .addUserMessage(userContent)
+
                 .build();
 
         // ------------------------------------------------------------
@@ -68,30 +73,34 @@ public class ChatService {
         ChatCompletion completion = client.chat().completions().create(params);
 
         // ------------------------------------------------------------
-        // 4. Extract something usable for now
+        // 4. Extract just the assistant's text reply
+        //    `message().content()` returns Optional<String>, so we unwrap safely.
         // ------------------------------------------------------------
         String answerText =
-        completion.choices().get(0)
-            .message()
-            .content()
-            .orElse("ElderMind could not produce an answer.");
-
-
+                completion.choices().get(0)
+                        .message()
+                        .content()
+                        .orElse("ElderMind could not produce an answer.");
 
         // ------------------------------------------------------------
-        // Map result into your ChatResponse DTO
+        // 5. Map result into your ChatResponse DTO
         // ------------------------------------------------------------
         ChatResponse response = new ChatResponse();
         response.setReply(answerText);
 
-        // ----- Extract token usage safely -----
-        response.setPromptTokens(
-        completion.usage().map(u -> u.promptTokens()).orElse(0L).intValue()
-        );
+        // ----- Extract token usage safely (Optional<Long> → int) -----
+        int promptTokens = completion.usage()
+                .map(u -> u.promptTokens())
+                .orElse(0L)
+                .intValue();
 
-        response.setCompletionTokens(
-                completion.usage().map(u -> u.completionTokens()).orElse(0L).intValue()
-        );
+        int completionTokens = completion.usage()
+                .map(u -> u.completionTokens())
+                .orElse(0L)
+                .intValue();
+
+        response.setPromptTokens(promptTokens);
+        response.setCompletionTokens(completionTokens);
 
         return response;
     }
