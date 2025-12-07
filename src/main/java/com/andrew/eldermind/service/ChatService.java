@@ -31,14 +31,25 @@ public class ChatService {
     /**
      * Main entry point called by ChatController.
      * - Reads the user's last message from ChatRequest
-     * - Builds a system/developer prompt + user message
+     * - Chooses a system prompt based on `mode`
      * - Calls OpenAI Chat Completions API
      * - Returns a ChatResponse DTO to the frontend
      */
     public ChatResponse getChatResponse(ChatRequest request) {
 
         // ------------------------------------------------------------
-        // 1. Extract the latest user message from your ChatRequest DTO
+        // 1. Determine mode (behavior style) from request
+        // ------------------------------------------------------------
+        // If mode is null/blank, we default to "scholar".
+        String mode = (request.getMode() == null || request.getMode().isBlank())
+                ? "scholar"
+                : request.getMode().trim().toLowerCase();
+
+        // We'll pick the system prompt text based on `mode`.
+        String systemPrompt = buildSystemPromptForMode(mode);
+
+        // ------------------------------------------------------------
+        // 2. Extract the latest user message from your ChatRequest DTO
         // ------------------------------------------------------------
         String userContent = "Explain some Elder Scrolls lore.";
         if (request.getMessages() != null && !request.getMessages().isEmpty()) {
@@ -49,31 +60,27 @@ public class ChatService {
         }
 
         // ------------------------------------------------------------
-        // 2. Build ChatCompletionCreateParams for the Chat Completions API
-        //    Here is where we add the *system-style* prompt.
+        // 3. Build ChatCompletionCreateParams for the Chat Completions API
+        //    Here is where we add the mode-specific system prompt.
         // ------------------------------------------------------------
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
                 .model(ChatModel.GPT_4_1_MINI)
 
-                // 👇 SYSTEM / DEVELOPER PROMPT: ElderMind persona
-                .addDeveloperMessage("""
-                    You are ELDERMIND — an Elder Scrolls lore expert.
-                    You speak with an in-universe, scholarly tone and reference
-                    canon sources from TES3, TES4, TES5, ESO, and official writings.
-                    If something is speculative or fan theory, clearly label it as such.
-                    """)
-                // 👇 USER MESSAGE: what came from the frontend
+                // SYSTEM / DEVELOPER PROMPT: ElderMind persona, varies by mode
+                .addDeveloperMessage(systemPrompt)
+
+                // USER MESSAGE: what came from the frontend
                 .addUserMessage(userContent)
 
                 .build();
 
         // ------------------------------------------------------------
-        // 3. Call OpenAI: this actually hits the API
+        // 4. Call OpenAI: this actually hits the API
         // ------------------------------------------------------------
         ChatCompletion completion = client.chat().completions().create(params);
 
         // ------------------------------------------------------------
-        // 4. Extract just the assistant's text reply
+        // 5. Extract just the assistant's text reply
         //    `message().content()` returns Optional<String>, so we unwrap safely.
         // ------------------------------------------------------------
         String answerText =
@@ -83,7 +90,7 @@ public class ChatService {
                         .orElse("ElderMind could not produce an answer.");
 
         // ------------------------------------------------------------
-        // 5. Map result into your ChatResponse DTO
+        // 6. Map result into your ChatResponse DTO
         // ------------------------------------------------------------
         ChatResponse response = new ChatResponse();
         response.setReply(answerText);
@@ -103,5 +110,39 @@ public class ChatService {
         response.setCompletionTokens(completionTokens);
 
         return response;
+    }
+
+    /**
+     * Helper method:
+     * Return a system prompt string based on the requested mode.
+     * Right now we support:
+     *   - "scholar"      → in-lore, canonical explanations
+     *   - "in-character" → roleplay-style responses (stubbed, can refine later)
+     * Any unknown mode falls back to "scholar".
+     */
+    private String buildSystemPromptForMode(String mode) {
+        switch (mode) {
+            case "in-character":
+                return """
+                    You are ELDERMIND in an in-character roleplay mode.
+                    Respond as if you are a living inhabitant of Tamriel:
+                    speak in-universe, with flavor, personality, and references
+                    to in-world locations, people, and events.
+                    Do NOT break character by mentioning being an AI or model.
+                    If the user asks for out-of-world metadata (like release dates),
+                    you may briefly drop character to answer, then return to roleplay.
+                    """;
+
+            case "scholar":
+            default:
+                return """
+                    You are ELDERMIND — an Elder Scrolls lore scholar.
+                    You explain lore with scholarly detail and clear structure,
+                    referencing canon sources from TES3, TES4, TES5, ESO, and
+                    official developer writings when relevant.
+                    Maintain an in-universe, analytical tone.
+                    If something is speculative or fan theory, clearly label it.
+                    """;
+        }
     }
 }
