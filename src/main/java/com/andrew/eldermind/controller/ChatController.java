@@ -6,6 +6,7 @@ import com.andrew.eldermind.dto.ChatResponse;
 import com.andrew.eldermind.service.ChatService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173") // <-- allow your Vite frontend
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
