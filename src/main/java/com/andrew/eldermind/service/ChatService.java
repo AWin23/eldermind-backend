@@ -176,6 +176,85 @@ public class ChatService {
         return response;
     }
 
+    // Overloaded method to handle extra developer context for RAG-lite use case
+    public ChatResponse getChatResponse(ChatRequest request, String extraDeveloperContext) {
+    // ------------------------------------------------------------
+    // 1. Determine mode / persona from request
+    // ------------------------------------------------------------
+    String mode = (request.getMode() == null || request.getMode().isBlank())
+            ? "scholar"
+            : request.getMode().trim().toLowerCase();
+
+    // Base persona prompt
+    String systemPrompt = buildSystemPromptForMode(mode);
+
+    /**
+     * Sprint 2: Lore grounding
+     * If the LoreOrchestrator provides an evidence block, we append it
+     * to the developer message so the model is "conditioned" to use it
+     * as authoritative context for this request.
+     *
+     * This is how we do RAG-lite without changing the frontend DTO.
+     */
+    if (extraDeveloperContext != null && !extraDeveloperContext.isBlank()) {
+        systemPrompt = systemPrompt + "\n\n" + extraDeveloperContext;
+    }
+
+    // ------------------------------------------------------------
+    // 2. Build ChatCompletionCreateParams with full chat history
+    // ------------------------------------------------------------
+    ChatCompletionCreateParams.Builder builder = ChatCompletionCreateParams.builder()
+            .model(ChatModel.GPT_4_1_MINI)
+            .addDeveloperMessage(systemPrompt);
+
+    if (request.getMessages() != null && !request.getMessages().isEmpty()) {
+        for (ChatMessage m : request.getMessages()) {
+            String role = (m.getRole() == null) ? "user" : m.getRole().toLowerCase();
+            String content = (m.getContent() == null) ? "" : m.getContent();
+
+            switch (role) {
+                case "assistant":
+                    builder.addAssistantMessage(content);
+                    break;
+                case "user":
+                default:
+                    builder.addUserMessage(content);
+                    break;
+            }
+        }
+    } else {
+        builder.addUserMessage("Explain some Elder Scrolls lore.");
+    }
+
+    ChatCompletionCreateParams params = builder.build();
+
+    // ------------------------------------------------------------
+    // 3. Call OpenAI
+    // ------------------------------------------------------------
+    ChatCompletion completion = client.chat().completions().create(params);
+
+    // ------------------------------------------------------------
+    // 4. Extract answer + usage
+    // ------------------------------------------------------------
+    String answerText =
+            completion.choices().get(0)
+                    .message()
+                    .content()
+                    .orElse("ElderMind could not produce an answer.");
+
+    ChatResponse response = new ChatResponse();
+    response.setReply(answerText);
+
+    int promptTokens = completion.usage().map(u -> u.promptTokens()).orElse(0L).intValue();
+    int completionTokens = completion.usage().map(u -> u.completionTokens()).orElse(0L).intValue();
+
+    response.setPromptTokens(promptTokens);
+    response.setCompletionTokens(completionTokens);
+
+    return response;
+}
+
+
     /**
      * Helper method that centralizes all persona-specific system prompts.
      *
