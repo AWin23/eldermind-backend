@@ -2,11 +2,20 @@ package com.andrew.eldermind.lore.orchestration;
 
 import com.andrew.eldermind.dto.ChatRequest;
 import com.andrew.eldermind.dto.ChatResponse;
+import com.andrew.eldermind.dto.RetrievalDecision;
+import com.andrew.eldermind.dto.FallbackReason;
+
+
 import com.andrew.eldermind.service.ChatService;
 import com.andrew.eldermind.lore.retrieval.LoreRetriever;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
+import com.andrew.eldermind.lore.corpus.LoreMatch;
 import com.andrew.eldermind.lore.gateway.LoreLLMGateway;
 import org.springframework.stereotype.Service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.andrew.eldermind.dto.RetrievalDecision;
 
 import java.util.List;
 
@@ -24,6 +33,14 @@ import java.util.List;
  */
 @Service
 public class DefaultLoreOrchestrator implements LoreOrchestrator {
+
+    // Logger for logging purposes
+    private static final Logger log = LoggerFactory.getLogger(DefaultLoreOrchestrator.class);
+
+    // Constants for configuration and threshold constant
+    private static final double DEFAULT_THRESHOLD = 0.15; // pick your gating value
+    private static final String RETRIEVER_VERSION = "keyword-v1";
+
 
     private final LoreRetriever loreRetriever;
     private final LorePromptAssembler lorePromptAssembler;
@@ -56,71 +73,170 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         this.loreLLMGateway = loreLLMGateway;
         this.chatService = chatService;
     }
+
+    /**
+     * Logs retrieval decision metadata for observability.
+     * This gives us an explainable trail of why retrieval was used or skipped.
+     *
+     * NOTE: We intentionally truncate the query to avoid noisy logs and accidental PII leakage.
+     */
+    private void logDecision(RetrievalDecision decision, String query) {
+        if (decision == null) return;
+
+        String safeQuery = (query == null) ? "" : query.trim();
+        if (safeQuery.length() > 160) {
+            safeQuery = safeQuery.substring(0, 160) + "...";
+        }
+
+        log.info(
+            "RetrievalDecision attempted={} used={} matchedDocs={} topScore={} threshold={} fallbackReason={} retrieverVersion={} query=\"{}\"",
+            decision.isRetrievalAttempted(),
+            decision.isRetrievalUsed(),
+            decision.getMatchedDocs(),
+            decision.getTopScore(),
+            decision.getThreshold(),
+            decision.getFallbackReason(),
+            decision.getRetrieverVersion(),
+            safeQuery
+        );
+    }
+
     
     @Override
     public ChatResponse answer(ChatRequest request, boolean includeSources) {
 
         /**
-         * Step 0: Determine the "latest user question".
-         * In most chat systems, the last message in the list is the newest.
-         * We assume frontend appends messages in order.
+         * RetrievalDecision captures explainability metadata for this request.
+         * It allows us to understand:
+         *  - whether retrieval was attempted,
+         *  - whether it was used,
+         *  - why we fell back when it was not used.
+         *
+         * This is critical for observability, debugging, and AI safety.
+         */
+        RetrievalDecision decision = new RetrievalDecision();
+        decision.setRetrieverVersion(RETRIEVER_VERSION);
+        decision.setThreshold(DEFAULT_THRESHOLD);
+
+        /**
+         * Step 0: Extract the most recent user-authored message.
+         * We treat this as the canonical query for lore retrieval.
          */
         String latestUserQuery = extractLatestUserMessage(request);
 
         /**
-         * Step 1: Retrieve the top K lore snippets for this user query.
-         * Sprint 2: K is small (3–6) on purpose:
-         *  - keeps token cost low
-         *  - avoids overwhelming the model
-         *  - makes the answer feel curated
+         * Step 0a: If the query is empty or meaningless,
+         * skip retrieval entirely and fall back to standard chat behavior.
          */
-        int k = 4;
-        List<LoreDocument> evidence = loreRetriever.retrieveTopK(latestUserQuery, k);
-        if (evidence == null || evidence.isEmpty()) {
-        // No relevant sources found → do normal ElderMind scholar response
-        return chatService.getChatResponse(request);
-}
+        if (latestUserQuery == null || latestUserQuery.trim().isEmpty()) {
+            decision.setRetrievalAttempted(false);
+            decision.setRetrievalUsed(false);
+            decision.setMatchedDocs(0);
+            decision.setTopScore(0.0);
+            decision.setFallbackReason(FallbackReason.NO_KEYWORDS);
+
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
 
         /**
-         * Step 2: Convert those documents into an "evidence block"
-         * that will be injected into the LLM prompt.
-         *
-         * This block is what actually makes responses grounded.
-         * The LLM isn't asked to "remember Elder Scrolls lore"—
-         * it is given source snippets to reference.
+         * From this point onward, retrieval has been attempted.
+         */
+        decision.setRetrievalAttempted(true);
+
+        int k = 4; // Small K to keep token usage low and results curated
+        List<LoreMatch> matches;
+
+        /**
+         * Step 1: Attempt lore retrieval.
+         * Any exception here should fail safely and fall back to chat-only mode.
+         */
+        try {
+            matches = loreRetriever.retrieveTopK(latestUserQuery, k);
+        } catch (Exception e) {
+            decision.setRetrievalUsed(false);
+            decision.setMatchedDocs(0);
+            decision.setTopScore(0.0);
+            decision.setFallbackReason(FallbackReason.ERROR);
+
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
+
+        /**
+         * Step 2: If no documents matched at all,
+         * do not inject unrelated or low-quality evidence.
+         */
+        if (matches == null || matches.isEmpty()) {
+            decision.setRetrievalUsed(false);
+            decision.setMatchedDocs(0);
+            decision.setTopScore(0.0);
+            decision.setFallbackReason(FallbackReason.NO_MATCHES);
+
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
+
+        /**
+         * Step 3: Record relevance statistics.
+         * Matches are assumed to be sorted by descending score.
+         */
+        double topScore = matches.get(0).getScore();
+        decision.setTopScore(topScore);
+        decision.setMatchedDocs(matches.size());
+
+        /**
+         * Step 4: Apply relevance gating.
+         * If the best match is below threshold, we deliberately skip retrieval
+         * to avoid poisoning the response with weak or unrelated lore.
+         */
+        if (topScore < DEFAULT_THRESHOLD) {
+            decision.setRetrievalUsed(false);
+            decision.setFallbackReason(FallbackReason.BELOW_THRESHOLD);
+
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
+
+        /**
+         * Step 5: Retrieval passed the gate.
+         * Evidence will be injected into the prompt.
+         */
+        decision.setRetrievalUsed(true);
+        decision.setFallbackReason(null);
+
+        /**
+         * Convert LoreMatch objects into raw LoreDocuments
+         * for prompt assembly.
+         */
+        List<LoreDocument> evidence = matches.stream()
+            .map(LoreMatch::getDocument)
+            .toList();
+
+        /**
+         * Step 6: Build a grounded evidence block and generate the LLM response.
+         * The LLM is required to use this evidence for factual claims.
          */
         String evidenceBlock = lorePromptAssembler.buildEvidenceBlock(evidence);
-
-        /**
-         * Step 3: Call the LLM gateway (OpenAI layer).
-         *
-         * IMPORTANT:
-         * The OpenAI API is stateless.
-         * So on every request, we must send:
-         *  - persona prompt (developer message)
-         *  - conversation history (replayed messages)
-         *  - evidence block (grounding)
-         *  - latest user question
-         *
-         * The gateway handles the actual OpenAI SDK call.
-         */
         ChatResponse response = loreLLMGateway.generateLoreAnswer(request, evidenceBlock);
 
         /**
-         * Step 4 (Optional): Attach sources.
-         * For now, your ChatResponse may not have a place for sources.
-         * The typical next step is to upgrade ChatResponse or create LoreChatResponse.
-         *
-         * Sprint 2 MVP: we can also just append a "Sources:" section to the text.
+         * Step 7 (Optional): Attach visible source citations for UI display.
          */
-        if (includeSources && evidence != null && !evidence.isEmpty()) {
+        if (includeSources) {
             response.setReply(
                 response.getReply() + "\n\n" + lorePromptAssembler.buildSourcesFooter(evidence)
             );
         }
 
+        /**
+         * Final step: Log successful retrieval decision for observability.
+         */
+        logDecision(decision, latestUserQuery);
+
         return response;
     }
+
 
     /**
      * Pull the most recent user message from the request.

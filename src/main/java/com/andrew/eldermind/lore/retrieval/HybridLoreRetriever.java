@@ -1,6 +1,7 @@
 package com.andrew.eldermind.lore.retrieval;
 
 import com.andrew.eldermind.lore.corpus.LoreDocument;
+import com.andrew.eldermind.lore.corpus.LoreMatch;
 import com.andrew.eldermind.lore.corpus.LoreCorpusLoader;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,7 @@ public class HybridLoreRetriever implements LoreRetriever {
 
 
     @Override
-    public List<LoreDocument> retrieveTopK(String query, int k) {
+    public List<LoreMatch> retrieveTopK(String query, int k) {
 
         // --- Step A: extract keywords from query ---
         Set<String> keywords = queryAnalyzer.extractKeywords(query);
@@ -68,18 +69,19 @@ public class HybridLoreRetriever implements LoreRetriever {
         );
 
         // --- Step D: take only positive-score matches ---
-        List<LoreDocument> topMatches = scoredDocs.stream()
-                .filter(s -> s.score > 0)
+        List<LoreMatch> topMatches = scoredDocs.stream()
+                .filter(s -> s.score() > 0)
                 .limit(k)
-                .map(ScoredLoreDocument::doc)
+                .map(s -> new LoreMatch(s.doc(), s.score()))
                 .collect(Collectors.toList());
 
         // --- Step E: FALLBACK if nothing matched ---
         if (topMatches.isEmpty()) {
             System.out.println("No positive-score matches found — falling back to top K documents.");
+
             topMatches = scoredDocs.stream()
                     .limit(k)
-                    .map(ScoredLoreDocument::doc)
+                    .map(s -> new LoreMatch(s.doc(), s.score()))
                     .collect(Collectors.toList());
         }
 

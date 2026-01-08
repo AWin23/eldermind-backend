@@ -1,8 +1,9 @@
 package com.andrew.eldermind.lore.retrieval;
 
-import com.andrew.eldermind.lore.corpus.LoreDocument;
+import com.andrew.eldermind.lore.corpus.LoreMatch;
+
 import java.util.List;
 
 public interface LoreRetriever {
-    List<LoreDocument> retrieveTopK(String query, int k);
+    List<LoreMatch> retrieveTopK(String query, int k);
 }
