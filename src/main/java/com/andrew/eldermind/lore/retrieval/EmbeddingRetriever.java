@@ -7,6 +7,7 @@ import com.andrew.eldermind.lore.gateway.EmbeddingClient;
 import org.springframework.stereotype.Service;
 
 import com.andrew.eldermind.lore.corpus.LoreCorpusLoader;
+import com.andrew.eldermind.lore.corpus.LoreCorpusStore;
 
 import java.util.Comparator;
 import java.util.List;
@@ -39,11 +40,11 @@ public class EmbeddingRetriever implements LoreRetriever {
     // External gateway to generate embeddings (query-time).
     private final EmbeddingClient embeddingClient;
 
-    public EmbeddingRetriever(LoreCorpusLoader corpusLoader, EmbeddingClient embeddingClient) {
+    public EmbeddingRetriever(LoreCorpusStore corpusStore, EmbeddingClient embeddingClient) {
 
         // Loads corpus into memory at startup.
         // This keeps retrieval fast and avoids re-reading JSON on every request.
-        this.corpus = corpusLoader.load();
+        this.corpus = corpusStore.getCorpus();
         this.embeddingClient = embeddingClient;
     }
 

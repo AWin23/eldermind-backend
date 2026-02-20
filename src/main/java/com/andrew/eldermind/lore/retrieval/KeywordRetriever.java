@@ -2,7 +2,8 @@ package com.andrew.eldermind.lore.retrieval;
 
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
-import com.andrew.eldermind.lore.corpus.LoreCorpusLoader;
+import com.andrew.eldermind.lore.corpus.LoreCorpusStore;
+
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,11 +22,11 @@ public class KeywordRetriever implements LoreRetriever {
     private final QueryAnalyzer queryAnalyzer;
 
         public KeywordRetriever(
-            LoreCorpusLoader corpusLoader,
+            LoreCorpusStore corpusStore,
             QueryAnalyzer queryAnalyzer
     ) {
         // Load corpus once at startup
-        this.corpus = List.copyOf(corpusLoader.load());
+        this.corpus = corpusStore.getCorpus();
         this.queryAnalyzer = queryAnalyzer;
 
         // --- Startup sanity check (dev-only) ---
