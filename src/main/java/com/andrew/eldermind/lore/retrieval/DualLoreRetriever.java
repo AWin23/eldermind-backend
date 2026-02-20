@@ -53,17 +53,22 @@ public class DualLoreRetriever {
         boolean keywordConfident = keywordTop >= KEYWORD_THRESHOLD;
         boolean embeddingConfident = embeddingTop >= EMBEDDING_THRESHOLD;
 
-        // 3) Decision logic (simple + explainable)
-        if (embeddingConfident && embeddingTop >= keywordTop) {
-            decision.setRetrievalUsed(true);
-            decision.setMatchedDocs(embeddingMatches.size());
-            decision.setTopScore(embeddingTop);
-            decision.setThreshold(EMBEDDING_THRESHOLD);
-            decision.setFallbackReason(null);
-            decision.setRetrieverVersion(EMBEDDING_VERSION);
-            return new DualRetrievalResult(decision, embeddingMatches);
-        }
+        // Log the scores and confidence for analysis (tune thresholds later).
+        System.out.println("[DualLoreRetriever] keywordTop=" + keywordTop +
+                   " embeddingTop=" + embeddingTop +
+                   " keywordConfident=" + keywordConfident +
+                   " embeddingConfident=" + embeddingConfident);
 
+        // ------------------------------------------------------------
+        // 3) Decision logic (explainable + safe)
+        // ------------------------------------------------------------
+        // IMPORTANT: keyword scores and embedding scores are on different scales.
+        // We should NOT compare them directly (e.g., embeddingTop >= keywordTop).
+        //
+        // Instead we use a "precision-first" policy:
+        // - If keyword retrieval is confident, prefer it (exact matches, lower hallucination risk).
+        // - Otherwise, if embeddings are confident, use semantic retrieval (better recall).
+        // - Otherwise, fall back to chat-only (or optionally use low-confidence keyword matches).
         if (keywordConfident) {
             decision.setRetrievalUsed(true);
             decision.setMatchedDocs(keywordMatches.size());
@@ -74,33 +79,26 @@ public class DualLoreRetriever {
             return new DualRetrievalResult(decision, keywordMatches);
         }
 
-        // Neither confident — best effort if we have *any* candidates
-        if (!embeddingMatches.isEmpty()) {
+        if (embeddingConfident) {
             decision.setRetrievalUsed(true);
             decision.setMatchedDocs(embeddingMatches.size());
             decision.setTopScore(embeddingTop);
             decision.setThreshold(EMBEDDING_THRESHOLD);
-            decision.setFallbackReason(FallbackReason.LOW_CONFIDENCE);
+            decision.setFallbackReason(null);
             decision.setRetrieverVersion(EMBEDDING_VERSION);
             return new DualRetrievalResult(decision, embeddingMatches);
         }
 
-        if (!keywordMatches.isEmpty()) {
-            decision.setRetrievalUsed(true);
-            decision.setMatchedDocs(keywordMatches.size());
-            decision.setTopScore(keywordTop);
-            decision.setThreshold(KEYWORD_THRESHOLD);
-            decision.setFallbackReason(FallbackReason.LOW_CONFIDENCE);
-            decision.setRetrieverVersion(KEYWORD_VERSION);
-            return new DualRetrievalResult(decision, keywordMatches);
-        }
-
-        // No matches at all — fallback
+        // ------------------------------------------------------------
+        // 4) Not confident enough to ground safely → fallback
+        // ------------------------------------------------------------
+        // If you want "best effort" behavior, you could return keywordMatches here,
+        // but safest is: don't inject weak evidence.
         decision.setRetrievalUsed(false);
         decision.setMatchedDocs(0);
         decision.setTopScore(0.0);
         decision.setThreshold(null);
-        decision.setFallbackReason(FallbackReason.NO_MATCHES);
+        decision.setFallbackReason(FallbackReason.BELOW_THRESHOLD);
         decision.setRetrieverVersion(KEYWORD_VERSION);
         return new DualRetrievalResult(decision, List.of());
     }
