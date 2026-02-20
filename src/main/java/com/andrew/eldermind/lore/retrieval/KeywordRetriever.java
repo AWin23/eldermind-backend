@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
  * Later versions will add embedding similarity.
  */
 @Service
-public class HybridLoreRetriever implements LoreRetriever {
+public class KeywordRetriever implements LoreRetriever {
 
     private final List<LoreDocument> corpus;
     private final QueryAnalyzer queryAnalyzer;
 
-        public HybridLoreRetriever(
+        public KeywordRetriever(
             LoreCorpusLoader corpusLoader,
             QueryAnalyzer queryAnalyzer
     ) {

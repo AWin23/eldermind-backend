@@ -2,12 +2,13 @@ package com.andrew.eldermind.lore.orchestration;
 
 import com.andrew.eldermind.dto.ChatRequest;
 import com.andrew.eldermind.dto.ChatResponse;
+import com.andrew.eldermind.dto.DualRetrievalResult;
 import com.andrew.eldermind.dto.RetrievalDecision;
 import com.andrew.eldermind.dto.FallbackReason;
 
 
 import com.andrew.eldermind.service.ChatService;
-import com.andrew.eldermind.lore.retrieval.LoreRetriever;
+import com.andrew.eldermind.lore.retrieval.DualLoreRetriever;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
 import com.andrew.eldermind.lore.gateway.LoreLLMGateway;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.andrew.eldermind.dto.RetrievalDecision;
 
 import java.util.List;
 
@@ -42,33 +42,45 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
     private static final String RETRIEVER_VERSION = "keyword-v1";
 
 
-    private final LoreRetriever loreRetriever;
+    private final DualLoreRetriever dualLoreRetriever;
     private final LorePromptAssembler lorePromptAssembler;
     private final LoreLLMGateway loreLLMGateway;
     private final ChatService chatService;
 
     /**
-     * We split responsibilities into:
-     * - LoreRetriever: find relevant documents/snippets
-     * - LorePromptAssembler: turn evidence into a clean prompt context
-     * - LoreLLMGateway: the bridge to OpenAI (keeps orchestration testable)
+     * DefaultLoreOrchestrator
      *
-     * If you want fewer files, you *can* inline these into this class,
-     * but splitting them makes it easier to reason about later.
-     * 
-    // 1) retrieve snippets
-    // 2) build evidence pack
-    // 3) label sections
-    // 4) assemble prompt + call OpenAI chat
-    // 5) return response with optional sources
-    */
-   public DefaultLoreOrchestrator(
-       LoreRetriever loreRetriever,
-       LorePromptAssembler lorePromptAssembler,
-       LoreLLMGateway loreLLMGateway,
-       ChatService chatService
+     * High-level pipeline for ElderMind's grounded responses.
+     *
+     * We intentionally split responsibilities into focused components:
+     *
+     * 1) DualLoreRetriever (Retrieval + Evaluation)
+     *    - Runs BOTH retrieval strategies (Keyword + Embeddings)
+     *    - Chooses the best candidate set using simple confidence thresholds
+     *    - Produces a RetrievalDecision for observability (why retrieval was used/skipped)
+     *
+     * 2) LorePromptAssembler (Context Packaging)
+     *    - Converts top LoreMatch results into a compact “evidence pack”
+     *    - Formats citations / section headers to keep tokens low and context readable
+     *
+     * 3) LoreLLMGateway (LLM Boundary)
+     *    - Encapsulates the call to OpenAI / ChatService
+     *    - Keeps orchestration logic testable and decoupled from the vendor API
+     *
+     * Orchestration flow (answer()):
+     *  - Extract latest user query
+     *  - Run retrieval (keyword + embeddings) and get a decision + matches
+     *  - Apply gating (thresholds) to avoid injecting weak/irrelevant lore
+     *  - Assemble the final prompt (chat history + persona + evidence)
+     *  - Call the LLM and return ChatResponse (optionally includes sources)
+     */
+    public DefaultLoreOrchestrator(
+            DualLoreRetriever dualLoreRetriever,
+            LorePromptAssembler lorePromptAssembler,
+            LoreLLMGateway loreLLMGateway,
+            ChatService chatService
     ) {
-        this.loreRetriever = loreRetriever;
+        this.dualLoreRetriever = dualLoreRetriever;
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
         this.chatService = chatService;
@@ -115,8 +127,6 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
          * This is critical for observability, debugging, and AI safety.
          */
         RetrievalDecision decision = new RetrievalDecision();
-        decision.setRetrieverVersion(RETRIEVER_VERSION);
-        decision.setThreshold(DEFAULT_THRESHOLD);
 
         /**
          * Step 0: Extract the most recent user-authored message.
@@ -151,8 +161,10 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
          * Step 1: Attempt lore retrieval.
          * Any exception here should fail safely and fall back to chat-only mode.
          */
+        DualRetrievalResult result;
+
         try {
-            matches = loreRetriever.retrieveTopK(latestUserQuery, k);
+            result = dualLoreRetriever.retrieveBest(latestUserQuery, k);
         } catch (Exception e) {
             decision.setRetrievalUsed(false);
             decision.setMatchedDocs(0);
@@ -162,6 +174,10 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             logDecision(decision, latestUserQuery);
             return chatService.getChatResponse(request);
         }
+
+        // Initialize matches and decision metadata from the retrieval result
+        decision = result.getDecision();
+        matches = result.getMatches();
 
         /**
          * Step 2: If no documents matched at all,
