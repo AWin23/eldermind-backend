@@ -6,7 +6,6 @@ import com.andrew.eldermind.lore.corpus.LoreMatch;
 import com.andrew.eldermind.lore.gateway.EmbeddingClient;
 import org.springframework.stereotype.Service;
 
-import com.andrew.eldermind.lore.corpus.LoreCorpusLoader;
 import com.andrew.eldermind.lore.corpus.LoreCorpusStore;
 
 import java.util.Comparator;
