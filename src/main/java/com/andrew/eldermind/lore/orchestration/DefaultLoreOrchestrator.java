@@ -11,6 +11,7 @@ import com.andrew.eldermind.service.ChatService;
 import com.andrew.eldermind.lore.retrieval.DualLoreRetriever;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
+import com.andrew.eldermind.lore.retrieval.QueryAnalyzer;
 import com.andrew.eldermind.lore.gateway.LoreLLMGateway;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
     private final LorePromptAssembler lorePromptAssembler;
     private final LoreLLMGateway loreLLMGateway;
     private final ChatService chatService;
+    private final QueryAnalyzer queryAnalyzer;
 
     /**
      * DefaultLoreOrchestrator
@@ -78,12 +80,14 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             DualLoreRetriever dualLoreRetriever,
             LorePromptAssembler lorePromptAssembler,
             LoreLLMGateway loreLLMGateway,
-            ChatService chatService
+            ChatService chatService,
+            QueryAnalyzer queryAnalyzer
     ) {
         this.dualLoreRetriever = dualLoreRetriever;
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
         this.chatService = chatService;
+        this.queryAnalyzer = queryAnalyzer;
     }
 
     /**
@@ -194,6 +198,48 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         }
 
         /**
+         * Step 2.5: Hard-evidence gate (anti-false-positive filter)
+         *
+         * Keyword scoring can be fooled by generic tokens like "house" or "happened",
+         * which appear across many lore documents. That can produce a non-zero score
+         * even when none of the retrieved snippets actually mention the user's subject.
+         *
+         * To prevent injecting irrelevant lore, we require that at least one
+         * retrieved snippet contains at least one "must-hit" term from the query.
+         */
+        var keywords = queryAnalyzer.extractKeywords(latestUserQuery);
+
+        // Tokens that are too generic to count as proof of relevance.
+        // (These often show up in questions and can inflate keyword scores.)
+        var genericTerms = java.util.Set.of(
+                "house", "war", "event", "history", "story", "thing", "stuff",
+                "happened", "happen", "ended", "first"
+        );
+
+        // Must-hit terms = extracted keywords minus generic/noise terms.
+        // For "What happened to House Hlaalu?" this becomes {"hlaalu"}.
+        var mustHit = keywords.stream()
+                .filter(token -> !genericTerms.contains(token))
+                .collect(java.util.stream.Collectors.toSet());
+
+        // If we have must-hit terms, require that at least one retrieved doc
+        // actually contains one of them in its title or body.
+        boolean hasHardEvidence =
+                mustHit.isEmpty() || matches.stream().anyMatch(m -> {
+                    String t = safe(m.getDocument().getTitle()).toLowerCase();
+                    String b = safe(m.getDocument().getText()).toLowerCase();
+                    return mustHit.stream().anyMatch(term -> t.contains(term) || b.contains(term));
+                });
+
+        if (!hasHardEvidence) {
+            decision.setRetrievalUsed(false);
+            decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
+
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
+
+        /**
          * Step 3: Record relevance statistics.
          * Matches are assumed to be sorted by descending score.
          */
@@ -276,5 +322,10 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         var last = request.getMessages().get(request.getMessages().size() - 1);
         return last.getContent() == null ? "" : last.getContent();
     }
+
+    // Utility to safely handle null strings when checking for keywords in evidence.
+    private String safe(String s) {
+    return (s == null) ? "" : s;
+}
 }
 

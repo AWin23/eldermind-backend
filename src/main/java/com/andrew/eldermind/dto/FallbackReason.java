@@ -22,4 +22,8 @@ public enum FallbackReason {
 
     // For cases where retrieval was attempted but the top score was just very low, indicating weak relevance
     LOW_CONFIDENCE,
+
+    // When the retrieved evidence is not directly relevant to the question, even if it has a decent score. 
+    // This can be determined by checking for the presence of key terms from the question in the retrieved evidence.
+    NO_HARD_EVIDENCE
 }
