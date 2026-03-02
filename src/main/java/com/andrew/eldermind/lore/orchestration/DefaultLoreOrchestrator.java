@@ -2,13 +2,11 @@ package com.andrew.eldermind.lore.orchestration;
 
 import com.andrew.eldermind.dto.ChatRequest;
 import com.andrew.eldermind.dto.ChatResponse;
-import com.andrew.eldermind.dto.DualRetrievalResult;
 import com.andrew.eldermind.dto.RetrievalDecision;
 import com.andrew.eldermind.dto.FallbackReason;
 
 
 import com.andrew.eldermind.service.ChatService;
-import com.andrew.eldermind.lore.retrieval.DualLoreRetriever;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
 import com.andrew.eldermind.lore.retrieval.HybridRetriever;
@@ -41,54 +39,63 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
 
     // Constants for configuration and threshold constant
     private static final double DEFAULT_THRESHOLD = 0.15; // pick your gating value
-    private static final String RETRIEVER_VERSION = "keyword-v1";
 
     private static final int TOP_K = 4; // Small K to keep token usage low and results curated
 
-
-    private final DualLoreRetriever dualLoreRetriever;
     private final LorePromptAssembler lorePromptAssembler;
     private final LoreLLMGateway loreLLMGateway;
     private final ChatService chatService;
     private final QueryAnalyzer queryAnalyzer;
     private final HybridRetriever hybridRetriever;
 
+
     /**
      * DefaultLoreOrchestrator
      *
-     * High-level pipeline for ElderMind's grounded responses.
+     * High-level pipeline for ElderMind's grounded responses (Phase 2: Hybrid Retrieval).
      *
-     * We intentionally split responsibilities into focused components:
+     * Responsibilities are intentionally separated into focused components:
      *
-     * 1) DualLoreRetriever (Retrieval + Evaluation)
-     *    - Runs BOTH retrieval strategies (Keyword + Embeddings)
-     *    - Chooses the best candidate set using simple confidence thresholds
-     *    - Produces a RetrievalDecision for observability (why retrieval was used/skipped)
+     * 1) HybridRetriever (Retrieval + Ranking)
+     *    - Runs BOTH retrieval signals (Keyword + Embeddings)
+     *    - Merges scores per document using weighted hybrid scoring
+     *    - Normalizes keyword scores to align with cosine similarity
+     *    - Returns top K ranked LoreMatch results
      *
-     * 2) LorePromptAssembler (Context Packaging)
-     *    - Converts top LoreMatch results into a compact “evidence pack”
-     *    - Formats citations / section headers to keep tokens low and context readable
+     * 2) Hard-Evidence Gate (Safety Layer)
+     *    - Extracts meaningful query terms ("mustHit")
+     *    - Requires at least one retrieved document to contain at least one mustHit term
+     *    - Prevents generic or weak queries from injecting irrelevant lore
      *
-     * 3) LoreLLMGateway (LLM Boundary)
+     * 3) LorePromptAssembler (Context Packaging)
+     *    - Converts top LoreMatch results into a compact evidence pack
+     *    - Formats citations / section headers while minimizing token usage
+     *
+     * 4) LoreLLMGateway (LLM Boundary)
      *    - Encapsulates the call to OpenAI / ChatService
-     *    - Keeps orchestration logic testable and decoupled from the vendor API
+     *    - Keeps orchestration logic testable and vendor-agnostic
      *
      * Orchestration flow (answer()):
      *  - Extract latest user query
-     *  - Run retrieval (keyword + embeddings) and get a decision + matches
-     *  - Apply gating (thresholds) to avoid injecting weak/irrelevant lore
-     *  - Assemble the final prompt (chat history + persona + evidence)
-     *  - Call the LLM and return ChatResponse (optionally includes sources)
+     *  - Run hybrid retrieval to obtain ranked candidates
+     *  - Apply hard-evidence gate to ensure lexical grounding
+     *  - If gating passes → assemble evidence + persona + history
+     *  - If gating fails → fallback to chat-only mode
+     *  - Call LLM and return ChatResponse (optionally includes sources)
+     *
+     * Architectural Notes:
+     *  - Retrieval determines relevance.
+     *  - The gate determines safety.
+     *  - The orchestrator determines whether grounding is used.
      */
+
     public DefaultLoreOrchestrator(
-            DualLoreRetriever dualLoreRetriever,
             LorePromptAssembler lorePromptAssembler,
             LoreLLMGateway loreLLMGateway,
             ChatService chatService,
             QueryAnalyzer queryAnalyzer,
             HybridRetriever hybridRetriever
     ) {
-        this.dualLoreRetriever = dualLoreRetriever;
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
         this.chatService = chatService;
