@@ -11,6 +11,7 @@ import com.andrew.eldermind.service.ChatService;
 import com.andrew.eldermind.lore.retrieval.DualLoreRetriever;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
+import com.andrew.eldermind.lore.retrieval.HybridRetriever;
 import com.andrew.eldermind.lore.retrieval.QueryAnalyzer;
 import com.andrew.eldermind.lore.gateway.LoreLLMGateway;
 import org.springframework.stereotype.Service;
@@ -42,12 +43,15 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
     private static final double DEFAULT_THRESHOLD = 0.15; // pick your gating value
     private static final String RETRIEVER_VERSION = "keyword-v1";
 
+    private static final int TOP_K = 4; // Small K to keep token usage low and results curated
+
 
     private final DualLoreRetriever dualLoreRetriever;
     private final LorePromptAssembler lorePromptAssembler;
     private final LoreLLMGateway loreLLMGateway;
     private final ChatService chatService;
     private final QueryAnalyzer queryAnalyzer;
+    private final HybridRetriever hybridRetriever;
 
     /**
      * DefaultLoreOrchestrator
@@ -81,13 +85,15 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             LorePromptAssembler lorePromptAssembler,
             LoreLLMGateway loreLLMGateway,
             ChatService chatService,
-            QueryAnalyzer queryAnalyzer
+            QueryAnalyzer queryAnalyzer,
+            HybridRetriever hybridRetriever
     ) {
         this.dualLoreRetriever = dualLoreRetriever;
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
         this.chatService = chatService;
         this.queryAnalyzer = queryAnalyzer;
+        this.hybridRetriever = hybridRetriever;
     }
 
     /**
@@ -154,21 +160,16 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         }
 
         /**
-         * From this point onward, retrieval has been attempted.
-         */
-        decision.setRetrievalAttempted(true);
-
-        int k = 4; // Small K to keep token usage low and results curated
-        List<LoreMatch> matches;
-
-        /**
          * Step 1: Attempt lore retrieval.
          * Any exception here should fail safely and fall back to chat-only mode.
-         */
-        DualRetrievalResult result;
+         * From this point onward, retrieval has been attempted.
+        */
+
+        decision.setRetrievalAttempted(true);
+        List<LoreMatch> matches;
 
         try {
-            result = dualLoreRetriever.retrieveBest(latestUserQuery, k);
+            matches = hybridRetriever.retrieveTopK(latestUserQuery, TOP_K);
         } catch (Exception e) {
             decision.setRetrievalUsed(false);
             decision.setMatchedDocs(0);
@@ -179,9 +180,11 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             return chatService.getChatResponse(request);
         }
 
-        // Initialize matches and decision metadata from the retrieval result
-        decision = result.getDecision();
-        matches = result.getMatches();
+        // Populate decision metadata manually (Phase 2 simplified model)
+        decision.setMatchedDocs(matches.size());
+        decision.setTopScore(
+                matches.isEmpty() ? 0.0 : matches.get(0).getScore()
+        );
 
         /**
          * Step 2: If no documents matched at all,
@@ -222,6 +225,15 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
                 .filter(token -> !genericTerms.contains(token))
                 .collect(java.util.stream.Collectors.toSet());
 
+        
+        // If query is too generic, do NOT retrieve (prevents Warp-in-the-West or other irrelevant queries spam)
+        if (mustHit.isEmpty()) {
+            decision.setRetrievalUsed(false);
+            decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE); // or QUERY_TOO_GENERIC if you add it
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
+
         // If we have must-hit terms, require that at least one retrieved doc
         // actually contains one of them in its title or body.
         boolean hasHardEvidence =
@@ -231,6 +243,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
                     return mustHit.stream().anyMatch(term -> t.contains(term) || b.contains(term));
                 });
 
+        // If no hard evidence of relevance, skip retrieval to avoid poisoning the response.
         if (!hasHardEvidence) {
             decision.setRetrievalUsed(false);
             decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
