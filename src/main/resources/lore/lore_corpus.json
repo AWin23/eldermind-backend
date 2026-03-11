@@ -1,288 +1,473 @@
 [
-  {
-    "id": "uesp-red-mountain-001",
-    "source": "UESP",
-    "title": "Battle of Red Mountain",
-    "url": "https://en.uesp.net/wiki/Lore:Red_Mountain",
-    "text": "The Battle of Red Mountain was the climactic battle of the War of the First Council, and resulted in the sudden disappearance of the entire Dwemer race from Nirn.[18][16] The battle was fought at Red Mountain in Resdayn (present-day Morrowind) around 1E 700[19] (or possibly earlier),[nb 1] between the Chimer (led by General Nerevar, the Hortator) and the Dwemer (led by Dumac Dwarfking),[16][20] along with armies of Nords and Orcs.[17][21] The exact truth of what happened cannot be determined due to conflicting accounts,[22] but all agree that by the time the dust settled, much of that dust was all that remained of the Dwemer.[16] Though Nerevar died, his people claimed victory, and four Chimer were positioned to become living gods.[18][16] The First Council was held together for hundreds of years thanks to the friendship between Dumac and Nerevar. However, through means lost to history, Lord Voryn Dagoth of House Dagoth learned of a Dwemer scheme: deep in the bowels of Red Mountain on the island of Vvardenfell, the Dwemer had found the Heart of Lorkhan, and High Craftlord Kagrenac planned to harness it and use it to power a giant mechanical god.[18][16][23] Lord Dagoth reported this to the Chimer leadership, and eventually, the Hortator Nerevar confirmed it with his patron Azura. Nerevar confronted his friend Dumac, and they quarreled bitterly (some sources assert Dumac did not know of Kagrenac's plan at the time and thus misunderstood Nerevar's concerns). As a result, Nerevar led the Chimer to war in order to stop this profane usurpation.[18][16] At the start of the war, Dwemeri forces were concentrated in the northwest of the province, and their campaign initially had great success throughout the north.[17][24] There is speculation that many of the great metal automatons the Dwemer used as troops in the battle were built in the Great Workshops of Nchardak on the island of Solstheim. The coastal Dwemeri city was reputedly able to produce one automaton a day, an apparently impressive rate of production.[25] Many outlanders were at the battle, notably Orcs and Nords, and sources often designate them as allies of the Dwemer.[17] Nerevar, meanwhile, led his united people, the nomadic Ashlanders as well as the Great Houses (House Redoran, in particular, likes to trumpet its substantial contribution of warriors to the battle).[17][26][27] Nerevar did not have full control of the Chimer forces until a series of defeats convinced the Great Houses to relinquish command.[24] Once he had full command of the Chimer forces, Nerevar carefully orchestrated a confrontation at Dumac's citadel, a great Dwemer stronghold within Red Mountain where the Heart was being kept.[17][2] The bulk of Nerevar's troops left Narsis and headed north at roughly the same time as a horde of westerners entered Morrowind from the west and began crossing the Inner Sea.[18][21] Some sources claim that all who opposed Nerevar's forces in the battle were exterminated.[17][24] Others state that while all enemies of the Chimer forces were decisively defeated, only the Dwemer were wiped out completely.[28]",
-    "embedding": null
-  },
-  {
-    "id": "book-monomyth-001",
-    "source": "InGameBook",
-    "title": "The Monomyth",
-    "url": "",
-    "text": "Creation myths differ across cultures in Tamriel, and the truth is often disputed... (replace excerpt)",
-    "embedding": null
-  },
-  {
-    "id": "uesp-numidium-001",
-    "source": "UESP",
-    "title": "Numidium",
-    "url": "https://en.uesp.net/wiki/Lore:Numidium",
-    "text": "Numidium,[1] also known as Anumidium, Anumidum, the Brass God, the Prime Gestalt,[2] NM,[3] the Brass Tower,[4] Walk-Brass,[5][UOL 1] Big Walker,[6][2] Walking Star,[7] and the Divine Skin,[2] was a colossal construct of Dwemer origin.[8] It was constructed by Dwemeri Tonal Architect Lord Kagrenac[9][10][11] to be a new god, powered by the Heart of Lorkhan,[12] made to retake Resdayn from the Chimer[13] and possibly to make the Dwemer race immortal.[11] The Dwemer vanished from Tamriel before the Brass God could be activated, though their disappearance may be directly related to this endeavor.[11] The Numidium was, in practice, a weapon of devastating power. A 'thousand foot tall automaton, a golem or an atronach[nb 1] of sorts', it was used by Emperor Tiber Septim to complete his conquest of Tamriel at the end of the Second Era, but was destroyed afterward.[14] The golem was rebuilt and reactivated centuries later, and became the center of the phenomenon known as the Warp in the West, after which it was destroyed again.[8] Temporal distortions have accompanied each known use of the Numidium,[6] to the point that the Warp in the West is sometimes known as the 'Second Numidian Effect'.[15] Some believe that the Numidium was intrinsically evil: a ranking Clockwork Apostle refered to it as the 'most profane' of the Dwemer's creations, a 'walking horror', the 'Antipodal-God-Thing that reigned on the darkest pole of the sacred Nirn-Sphere', and the 'welded knot at the center of Anu that must be untied. The Apostles considered the Numidium the greatest threat to Sotha Sil's goals of bringing about the Nirn-Ensuing and the Anuic convergence of Anuvanna'si. Indeed, in the Second Era, the Clockwork City's supervising Factotum, Aios, would name Numidium first among the existential threats to the City.[16][3] A second Numidium, Akulakhan, was partially constructed in Morrowind in the late Third Era by Dagoth Ur. However, the destruction of Kagrenac's enchantments on the Heart of Lorkhan in 3E 427 prevented its activation",
-    "embedding": null
-  },
-  {
-    "id": "uesp-warp-west-001",
-    "source": "UESP",
-    "title": "The Warp in the West — Overview",
-    "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
-    "text": "Era: 3E 417 (9th to 11th of Frostfall)\nLocation: Iliac Bay (High Rock + Hammerfell)\nType: Localized Dragon Break / Second Numidian Effect / “Miracle of Peace”\n\nThe Warp in the West was a reality- and time-distortion event localized to the Iliac Bay. It began between the 9th and 11th of Frostfall, 3E 417, after political conflict surrounding the death of King Lysandus of Daggerfall escalated into a struggle for control of the Totem of Tiber Septim. The Totem could control Numidium, the ancient Dwemer brass golem once used by Tiber Septim. \n\nDuring the Warp, multiple major powers (Sentinel, Wayrest, Daggerfall, Orsinium, and even the Emperor) somehow all gained control of Numidium and used it to consolidate power at the same time. Before the event, the Iliac Bay contained forty-four city-states; after the strange cataclysms, only four major kingdoms remained: Sentinel, Wayrest, Daggerfall, and Orsinium—each swearing loyalty to the Emperor.\n\nThe Warp is sometimes compared to the Middle Dawn Dragon Break, but its effects appear to have been confined primarily to the Iliac Bay region.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-warp-west-002",
-    "source": "UESP",
-    "title": "The Warp in the West — Numidium, Totem, and Mantella",
-    "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
-    "text": "Key artifacts: Numidium, Totem of Tiber Septim, Mantella\n\nNumidium was a colossal Dwemer automaton later used by Emperor Tiber Septim to conquer Tamriel. To operate Numidium, two legendary components were central:\n- The Totem of Tiber Septim: used to control Numidium.\n- The Mantella: a massive gem that served as Numidium’s power source by holding the “heart” (life force) of a powerful individual.\n\nAccording to a commonly told account, Zurin Arctus (Tiber Septim’s Battlemage) helped create these artifacts and, by some versions of the legend, used his own heart to power the Mantella. After Tamriel was united, Arctus supposedly objected to further use of Numidium and attempted to reclaim his heart. In the attempt, both he and Numidium were destroyed, and the Totem and Mantella were lost. Unable to truly die without his heart, Arctus became the undead figure known as the Underking.\n\nOver centuries, the Blades worked to find and reassemble Numidiums remains. By 3E 401, the Totem was known to be in the possession of Lord Woodborne of Wayrest, and the Mantellas location was later divined.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-warp-west-003",
-    "source": "UESP",
-    "title": "The Warp in the West — Lead-up and the Totem Bidding War",
-    "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
-    "text": "Lead-up trigger: Death of King Lysandus of Daggerfall; struggle for Totem ownership\n\nIn 3E 403, King Lysandus of Daggerfall was assassinated (not immediately understood as assassination). In 3E 405, Emperor Uriel Septim VII sent an agent of the Blades to investigate events in the region. The investigation concluded that Lord Woodborne was responsible for Lysandus’ death as part of a scheme to seize power. \n\nThe Blades agent recovered the Totem of Tiber Septim from Woodborne’s co-conspirator Gothryd (Lysandus’ son and the new King of Daggerfall). Once the Totem was back in play, the powers of the Iliac Bay made competing offers for it, effectively turning the Totem into the centerpiece of a high-stakes political contest.\n\nA major danger surrounded the Totem: Zurin Arctus placed a seal on it such that only certain “worthy” individuals or crowned heads could wield it safely; others risked death if they attempted to activate Numidium.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-warp-west-004",
-    "source": "UESP",
-    "title": "The Warp in the West — The Seven Claimants",
-    "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
-    "text": "Claimants: Seven major powers deemed “worthy” to contend for the Totem\n\nSeven “worthy” claimants emerged as potential users of the Totem of Tiber Septim:\n\n1) Sentinel (Queen Akorithi): sought dominance in the Iliac Bay by destroying rivals.\n2) Wayrest (King Eadwyre and Queen Barenziah): sought to defeat enemies and consolidate power.\n3) Daggerfall (King Gothryd): sought dominance in the Iliac Bay by destroying rivals.\n4) Mannimarco, King of Worms: desired the Mantella’s power for personal apotheosis rather than merely Numidium’s military might.\n5) The Underking: sought to reclaim his lost heart (linked to the Mantella) to finally achieve true death.\n6) Gortwog gro-Nagorm (Orcish warlord): sought to restore an Orcish homeland (Orsinium) and gain recognition/equality for Orcs.\n7) Emperor Uriel Septim VII and the Blades (via agents such as Lady Brisienna): sought to use Numidium to pacify the region and restore Imperial order in High Rock and Hammerfell.\n\nA mysterious Blades-associated figure (often described as an unknown hero/adventurer) recovered the Mantella from Aetherius and set the stage for Numidiums activation.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-warp-west-005",
-    "source": "UESP",
-    "title": "The Warp in the West — The 9th of Frostfall and Dragon Break Effects",
-    "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
-    "text": "Date window: 9th to 11th of Frostfall, 3E 417\nCore anomaly: contradictory outcomes; time distortions; catastrophic battles and disasters\n\nWhat occurred during the Warp is unclear because reports are contradictory and paradoxical; many Blades agents were lost. Investigations concluded no fully coherent historical account could be formed—only that a “miracle” occurred. A recurring claim is that each of the seven powers took ownership of the Totem simultaneously and achieved their goals to some degree, implying time fractured into overlapping outcomes.\n\nSome observers experienced the three days as merged into one with missing time; other events seemed to take far longer than three days could contain. Natural disasters devastated the region: earthquakes, freak sandstorms in the Alikr, fires, and tsunamis along the Bjoulsae River.\n\nReports describe multiple titanic battles taking place around the Iliac Bay “simultaneously,” including clashes involving Orsinium, Wayrest, and Daggerfall in areas such as Gavaudon, Daenia, and the Ilessan Hills. The scale of destruction included firestorms that ignited forests and widespread decimation.\n\nWayrest’s court later implied they knew an ancient weapon would be activated and had attempted to buy it from a young adventurer, but when attacks began, they responded by sending armies—whose rapid travel and timing remain unexplained.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-warp-west-006",
-    "source": "UESP",
-    "title": "The Warp in the West — Aftermath and the “Miracle of Peace”",
-    "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
-    "text": "Result: 44 states → 4 kingdoms; Imperial loyalty; long-term political stabilization\n\nIn the immediate geopolitical aftermath, the Iliac Bay changed from forty-four independent regions to four major kingdoms—Daggerfall, Sentinel, Wayrest, and Orsinium—separated by blackened, desolate borderlands. Although smaller clashes continued for months, they were minor compared to the power unleashed during the Warp.\n\nIn later years the event was also called the “Miracle of Peace,” because despite immense death and destruction, the end state was a more stable Iliac Bay that remained loyal to the Empire. By 3E 433, the rulers of the four kingdoms were described as “ordained by the Nine,” and many Bretons interpreted the event as divine restoration—though the Blades strongly doubted a divine origin.\n\nKey consequences attributed to specific claimants:\n- Sentinel expanded along the northern coast of Hammerfell; after Queen Akorithis death, her son Lhotun ruled with reverence for Yokudan heritage and respect for Imperial ways.\n- Gortwogs Orsinium (often called Nova Orsinium) gained Imperial recognition, and Orcish citizens became more integrated across the Empire.\n- Mannimarco used the Totem/Mantella-related power to achieve apotheosis; in later years the Necromancers Moon was believed by his followers to embody his ascension.\n- Numidium vanished from Tamriel, and the Underking was not seen again. Some rumors claim the Underking reclaimed his heart, was annihilated along with Numidium, and created a wide anti-magic zone—though the exact location is unknown.\n- The mysterious Blades-associated agent/hero who found the Totem also disappeared amid the chaos.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-001",
-    "source": "UESP",
-    "title": "Indoril Nerevar — Early Life",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "Nerevars early life is mostly preserved through myth and conflicting traditions. Legends associate him with the “moon-and-star” symbol: some say he was born under a moon-and-star, others that he bore a moon-and-star birthmark, and some that his family standard carried the moon-and-star. Vivecs account frames Nerevar as of the same generation as Dagoth Ur and older than the Tribunal, and suggests he worked as a protector for a merchant caravan. During the late First Era, the Nords used armies and the thu’um to dominate Resdayn; after the War of Succession weakened them, Nerevar moved to seize the moment for rebellion.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-002",
-    "source": "UESP",
-    "title": "Indoril Nerevar — The Hortator and the First Council",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "Nerevar united disparate Chimer factions and became Hortator (their collective war leader). His alliance with the Dwemer was essential because Nordic power had not subdued Dwemeri underground cities; the alliance relied heavily on Nerevars personal bond with Dumac. Together, they repulsed the Nords at Red Mountain in 1E 416 and maintained cooperation for centuries. Dumac attended Nerevars wedding to Almalexia and gifted the swords Hopesfire and Trueflame (Trueflame becoming known as the Blade of Nerevar). Nerevar and Dumac later attended Emperor Gorieuss coronation as Resdayns representatives.\n\nKey relationships: Sotha Sil served as teacher/adviser; Vivec was a junior counselor; Voryn Dagoth was Lord High Councilor of House Dagoth (often described as loyal); Alandro Sul was Nerevars shield-companion. Traditions also describe Nerevar as Azuras champion: Azura blessed the Moon-and-Star ring so it would kill any wearer except Nerevar, and he swore to honor Ashlander ways, earning their allegiance.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-003",
-    "source": "UESP",
-    "title": "Indoril Nerevar — Vivecs Lessons and Mythic Deeds",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "Accounts in The 36 Lessons of Vivec place many mythic episodes during the era of the First Council. These stories portray extraordinary journeys and feats attributed to Nerevar and Vivec, including travel to distant lands and metaphysical teachings (e.g., claims about CHIM), as well as symbolic battles and pilgrimages described in vivid, allegorical language.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-004",
-    "source": "UESP",
-    "title": "Indoril Nerevar — War of the First Council Prelude",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "Voryn Dagoth learned of Kagrenacs plan to exploit the Heart of Lorkhan, which the Chimer would consider blasphemous. Dagoth warned Nerevar; when Nerevar confronted Dumac, the alliance fractured. Some sources suggest misunderstanding, implying Dumac may not have known the full plan until late. As war loomed, Nerevar again had to unify Chimer factions under his leadership. Despite Chimer skill in arms and magic, Dwemer technology made them a terrifying force, and the Chimer suffered defeats until they regrouped under Nerevar.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-005",
-    "source": "UESP",
-    "title": "Indoril Nerevar — Battle of Red Mountain and the Dwemer Disappearance",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "Nerevar orchestrated a climactic confrontation at Red Mountain using strategy and Ashlander scouts. The battle was a decisive Chimer victory but cost many lives, including Nerevars; his sword Trueflame was shattered and its fragments lost. The disappearance of the Dwemer is explained differently across traditions: Tribunal Temple teachings claim Nerevar (with Azura and the Tribunal) used the Heart of Lorkhan to make the Dwemer vanish, while other accounts hold the Dwemer destroyed themselves. Sources conflict regarding House Dagoths role and whether Voryn Dagoth remained loyal.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-006",
-    "source": "UESP",
-    "title": "Indoril Nerevar — Contested Accounts of His Death",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "How Nerevar died at Red Mountain is heavily disputed. Nordic traditions claim he was mortally wounded by Lorkhan and then feigned death to cut out the Heart and defeat the God of Mortals. Vivecs narrative implies Nerevar died from wounds received late in the battle, potentially involving Dumac and possibly Dagoth Ur. Ashlander belief holds that the Tribunal, seeking the Hearts power, poisoned a wounded Nerevar; this accusation is linked to Alandro Suls allegations after he was reportedly blinded and later lived among the Ashlanders.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-nerevar-007",
-    "source": "UESP",
-    "title": "Indoril Nerevar — Legacy, Oath, and Azuras Curse",
-    "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
-    "text": "After Red Mountain, Nerevar insisted that Almalexia, Sotha Sil, and Vivec swear before Azura never to use Kagrenacs Tools in the profane way intended by the Dwemer. Later, the Tribunal broke this oath and used the Tools to take divine power; Azura appeared and cursed them, declaring that her champion Nerevar would return to punish their betrayal and that the Chimer would become Dunmer, sharing the Tribunals fate.\n\nThe dispute over Nerevars death and the Tribunals legitimacy created a long-lasting schism: Great Houses accepted the Tribunal as living gods, while Ashlanders condemned them as murderers and preserved older traditions. Cultural/iconographic legacy includes masks and Ordinator vestments depicting Nerevars visage, and some traditions even claim he was transformed into a Bonewalker and depicted that way on Temple shrines.",
-    "embedding": null
-  },
     {
-    "id": "uesp-almalexia-001",
-    "source": "UESP",
-    "title": "Almalexia — Origins and Early Rule",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "Little is known of Almalexia before she became the wife of Indoril Nerevar. Temple myth claims that on Mount Assarnibibi, Molag Bal oversaw the ninety nine lovers of Boethiah who gave birth to her. She hailed from one of the Great Houses of Morrowind. Early in her life she ruled the capital city of Mournhold as queen. She operated an orphanage and commanded an orphan legion. She also led a faction known as the Shouts who carried out her will.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-almalexia-002",
-    "source": "UESP",
-    "title": "Almalexia — Formation of the First Council",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "Almalexia, also known as Ayem, played a central role in the formation of the First Council. Vivec emerged from a prophetic egg image delivered to her by Nerevar. Alongside Nerevar, Vivec, and Sotha Sil, she formed an alliance with the Dwemer to repel Nordic occupation. The Chimer and Dwemer defeated Nordic chieftains including Hoag Merkiller and Ysmir Wulfharth. After victory, the First Council was established. Almalexia wed Nerevar and received the twin blades Hopesfire and Trueflame from Dumac. Nerevar ruled as Hortator with Almalexia as queen.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-almalexia-003",
-    "source": "UESP",
-    "title": "Almalexia — War of the First Council and Red Mountain",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "The fall of the First Council culminated in the Battle of Red Mountain. Accounts differ. In Ashlander tradition, the Tribunal betrayed Nerevar after he refused to use Kagrenac tools for divine power. The Tribunal allegedly murdered him using poison and ritual deception. Vivec denies this version and claims Nerevar died of battle wounds. Nordic accounts describe the involvement of Shor and Wulfharth. In all versions, the Dwemer vanished and Nerevar died.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-almalexia-004",
-    "source": "UESP",
-    "title": "Almalexia — Ascension and Azura Curse",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "After Red Mountain, Sotha Sil learned how to use Kagrenac tools to tap into the Heart of Lorkhan. The Tribunal traveled to the Heart Chamber and became living gods known as Almsivi. Azura cursed them and transformed the Chimer into Dunmer, turning their skin ash gray and eyes red. Azura declared Nerevar would return to punish them. Almalexia viewed the transformation as a blessing of divine protection rather than a curse.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-almalexia-005",
-    "source": "UESP",
-    "title": "Almalexia — Role as Living Goddess",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "As a living god, Almalexia ruled Morrowind alongside Vivec and Sotha Sil. Resdayn became Morrowind. The Tribunal Temple dominated political and religious life. Almalexia was associated with midday mercy and served as patron of House Indoril. She commanded the Hands of Almalexia as her personal guard. She performed miracles, healed Corprus sufferers, inspired saints, and defended Morrowind from threats including Mehrunes Dagon and Akaviri invasions.",
-    "embedding": null
-  },
-  {
-    "id": "uesp-almalexia-006",
-    "source": "UESP",
-    "title": "Almalexia — Decline During Dagoth Ur Return",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "When Dagoth Ur awoke in 2E 882, he severed the Tribunal from the Heart of Lorkhan. Their divine power began to fade. The Great Ghostfence was built to contain him. The loss of Kagrenac tools Sunder and Keening weakened the Tribunal further. Almalexia grew harsher and withdrew from public life. Tension grew between her and Vivec. Her divinity diminished without access to the Heart.",
-    "embedding": null
-  },
+      "id": "uesp-red-mountain-001",
+      "source": "UESP",
+      "title": "Battle of Red Mountain",
+      "url": "https://en.uesp.net/wiki/Lore:Red_Mountain",
+      "text": "The Battle of Red Mountain was the climactic battle of the War of the First Council, and resulted in the sudden disappearance of the entire Dwemer race from Nirn.[18][16] The battle was fought at Red Mountain in Resdayn (present-day Morrowind) around 1E 700[19] (or possibly earlier),[nb 1] between the Chimer (led by General Nerevar, the Hortator) and the Dwemer (led by Dumac Dwarfking),[16][20] along with armies of Nords and Orcs.[17][21] The exact truth of what happened cannot be determined due to conflicting accounts,[22] but all agree that by the time the dust settled, much of that dust was all that remained of the Dwemer.[16] Though Nerevar died, his people claimed victory, and four Chimer were positioned to become living gods.[18][16] The First Council was held together for hundreds of years thanks to the friendship between Dumac and Nerevar. However, through means lost to history, Lord Voryn Dagoth of House Dagoth learned of a Dwemer scheme: deep in the bowels of Red Mountain on the island of Vvardenfell, the Dwemer had found the Heart of Lorkhan, and High Craftlord Kagrenac planned to harness it and use it to power a giant mechanical god.[18][16][23] Lord Dagoth reported this to the Chimer leadership, and eventually, the Hortator Nerevar confirmed it with his patron Azura. Nerevar confronted his friend Dumac, and they quarreled bitterly (some sources assert Dumac did not know of Kagrenac's plan at the time and thus misunderstood Nerevar's concerns). As a result, Nerevar led the Chimer to war in order to stop this profane usurpation.[18][16] At the start of the war, Dwemeri forces were concentrated in the northwest of the province, and their campaign initially had great success throughout the north.[17][24] There is speculation that many of the great metal automatons the Dwemer used as troops in the battle were built in the Great Workshops of Nchardak on the island of Solstheim. The coastal Dwemeri city was reputedly able to produce one automaton a day, an apparently impressive rate of production.[25] Many outlanders were at the battle, notably Orcs and Nords, and sources often designate them as allies of the Dwemer.[17] Nerevar, meanwhile, led his united people, the nomadic Ashlanders as well as the Great Houses (House Redoran, in particular, likes to trumpet its substantial contribution of warriors to the battle).[17][26][27] Nerevar did not have full control of the Chimer forces until a series of defeats convinced the Great Houses to relinquish command.[24] Once he had full command of the Chimer forces, Nerevar carefully orchestrated a confrontation at Dumac's citadel, a great Dwemer stronghold within Red Mountain where the Heart was being kept.[17][2] The bulk of Nerevar's troops left Narsis and headed north at roughly the same time as a horde of westerners entered Morrowind from the west and began crossing the Inner Sea.[18][21] Some sources claim that all who opposed Nerevar's forces in the battle were exterminated.[17][24] Others state that while all enemies of the Chimer forces were decisively defeated, only the Dwemer were wiped out completely.[28]",
+      "embedding": null
+    },
     {
-    "id": "uesp-almalexia-007",
+      "id": "book-monomyth-001",
+      "source": "InGameBook",
+      "title": "The Monomyth",
+      "url": "",
+      "text": "Creation myths differ across cultures in Tamriel, and the truth is often disputed... (replace excerpt)",
+      "embedding": null
+    },
+    {
+      "id": "uesp-numidium-001",
+      "source": "UESP",
+      "title": "Numidium",
+      "url": "https://en.uesp.net/wiki/Lore:Numidium",
+      "text": "Numidium,[1] also known as Anumidium, Anumidum, the Brass God, the Prime Gestalt,[2] NM,[3] the Brass Tower,[4] Walk-Brass,[5][UOL 1] Big Walker,[6][2] Walking Star,[7] and the Divine Skin,[2] was a colossal construct of Dwemer origin.[8] It was constructed by Dwemeri Tonal Architect Lord Kagrenac[9][10][11] to be a new god, powered by the Heart of Lorkhan,[12] made to retake Resdayn from the Chimer[13] and possibly to make the Dwemer race immortal.[11] The Dwemer vanished from Tamriel before the Brass God could be activated, though their disappearance may be directly related to this endeavor.[11] The Numidium was, in practice, a weapon of devastating power. A 'thousand foot tall automaton, a golem or an atronach[nb 1] of sorts', it was used by Emperor Tiber Septim to complete his conquest of Tamriel at the end of the Second Era, but was destroyed afterward.[14] The golem was rebuilt and reactivated centuries later, and became the center of the phenomenon known as the Warp in the West, after which it was destroyed again.[8] Temporal distortions have accompanied each known use of the Numidium,[6] to the point that the Warp in the West is sometimes known as the 'Second Numidian Effect'.[15] Some believe that the Numidium was intrinsically evil: a ranking Clockwork Apostle refered to it as the 'most profane' of the Dwemer's creations, a 'walking horror', the 'Antipodal-God-Thing that reigned on the darkest pole of the sacred Nirn-Sphere', and the 'welded knot at the center of Anu that must be untied. The Apostles considered the Numidium the greatest threat to Sotha Sil's goals of bringing about the Nirn-Ensuing and the Anuic convergence of Anuvanna'si. Indeed, in the Second Era, the Clockwork City's supervising Factotum, Aios, would name Numidium first among the existential threats to the City.[16][3] A second Numidium, Akulakhan, was partially constructed in Morrowind in the late Third Era by Dagoth Ur. However, the destruction of Kagrenac's enchantments on the Heart of Lorkhan in 3E 427 prevented its activation",
+      "embedding": null
+    },
+    {
+      "id": "uesp-warp-west-001",
+      "source": "UESP",
+      "title": "The Warp in the West — Overview",
+      "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
+      "text": "Era: 3E 417 (9th to 11th of Frostfall)\nLocation: Iliac Bay (High Rock + Hammerfell)\nType: Localized Dragon Break / Second Numidian Effect / “Miracle of Peace”\n\nThe Warp in the West was a reality- and time-distortion event localized to the Iliac Bay. It began between the 9th and 11th of Frostfall, 3E 417, after political conflict surrounding the death of King Lysandus of Daggerfall escalated into a struggle for control of the Totem of Tiber Septim. The Totem could control Numidium, the ancient Dwemer brass golem once used by Tiber Septim. \n\nDuring the Warp, multiple major powers (Sentinel, Wayrest, Daggerfall, Orsinium, and even the Emperor) somehow all gained control of Numidium and used it to consolidate power at the same time. Before the event, the Iliac Bay contained forty-four city-states; after the strange cataclysms, only four major kingdoms remained: Sentinel, Wayrest, Daggerfall, and Orsinium—each swearing loyalty to the Emperor.\n\nThe Warp is sometimes compared to the Middle Dawn Dragon Break, but its effects appear to have been confined primarily to the Iliac Bay region.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-warp-west-002",
+      "source": "UESP",
+      "title": "The Warp in the West — Numidium, Totem, and Mantella",
+      "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
+      "text": "Key artifacts: Numidium, Totem of Tiber Septim, Mantella\n\nNumidium was a colossal Dwemer automaton later used by Emperor Tiber Septim to conquer Tamriel. To operate Numidium, two legendary components were central:\n- The Totem of Tiber Septim: used to control Numidium.\n- The Mantella: a massive gem that served as Numidium’s power source by holding the “heart” (life force) of a powerful individual.\n\nAccording to a commonly told account, Zurin Arctus (Tiber Septim’s Battlemage) helped create these artifacts and, by some versions of the legend, used his own heart to power the Mantella. After Tamriel was united, Arctus supposedly objected to further use of Numidium and attempted to reclaim his heart. In the attempt, both he and Numidium were destroyed, and the Totem and Mantella were lost. Unable to truly die without his heart, Arctus became the undead figure known as the Underking.\n\nOver centuries, the Blades worked to find and reassemble Numidiums remains. By 3E 401, the Totem was known to be in the possession of Lord Woodborne of Wayrest, and the Mantellas location was later divined.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-warp-west-003",
+      "source": "UESP",
+      "title": "The Warp in the West — Lead-up and the Totem Bidding War",
+      "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
+      "text": "Lead-up trigger: Death of King Lysandus of Daggerfall; struggle for Totem ownership\n\nIn 3E 403, King Lysandus of Daggerfall was assassinated (not immediately understood as assassination). In 3E 405, Emperor Uriel Septim VII sent an agent of the Blades to investigate events in the region. The investigation concluded that Lord Woodborne was responsible for Lysandus’ death as part of a scheme to seize power. \n\nThe Blades agent recovered the Totem of Tiber Septim from Woodborne’s co-conspirator Gothryd (Lysandus’ son and the new King of Daggerfall). Once the Totem was back in play, the powers of the Iliac Bay made competing offers for it, effectively turning the Totem into the centerpiece of a high-stakes political contest.\n\nA major danger surrounded the Totem: Zurin Arctus placed a seal on it such that only certain “worthy” individuals or crowned heads could wield it safely; others risked death if they attempted to activate Numidium.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-warp-west-004",
+      "source": "UESP",
+      "title": "The Warp in the West — The Seven Claimants",
+      "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
+      "text": "Claimants: Seven major powers deemed “worthy” to contend for the Totem\n\nSeven “worthy” claimants emerged as potential users of the Totem of Tiber Septim:\n\n1) Sentinel (Queen Akorithi): sought dominance in the Iliac Bay by destroying rivals.\n2) Wayrest (King Eadwyre and Queen Barenziah): sought to defeat enemies and consolidate power.\n3) Daggerfall (King Gothryd): sought dominance in the Iliac Bay by destroying rivals.\n4) Mannimarco, King of Worms: desired the Mantella’s power for personal apotheosis rather than merely Numidium’s military might.\n5) The Underking: sought to reclaim his lost heart (linked to the Mantella) to finally achieve true death.\n6) Gortwog gro-Nagorm (Orcish warlord): sought to restore an Orcish homeland (Orsinium) and gain recognition/equality for Orcs.\n7) Emperor Uriel Septim VII and the Blades (via agents such as Lady Brisienna): sought to use Numidium to pacify the region and restore Imperial order in High Rock and Hammerfell.\n\nA mysterious Blades-associated figure (often described as an unknown hero/adventurer) recovered the Mantella from Aetherius and set the stage for Numidiums activation.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-warp-west-005",
+      "source": "UESP",
+      "title": "The Warp in the West — The 9th of Frostfall and Dragon Break Effects",
+      "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
+      "text": "Date window: 9th to 11th of Frostfall, 3E 417\nCore anomaly: contradictory outcomes; time distortions; catastrophic battles and disasters\n\nWhat occurred during the Warp is unclear because reports are contradictory and paradoxical; many Blades agents were lost. Investigations concluded no fully coherent historical account could be formed—only that a “miracle” occurred. A recurring claim is that each of the seven powers took ownership of the Totem simultaneously and achieved their goals to some degree, implying time fractured into overlapping outcomes.\n\nSome observers experienced the three days as merged into one with missing time; other events seemed to take far longer than three days could contain. Natural disasters devastated the region: earthquakes, freak sandstorms in the Alikr, fires, and tsunamis along the Bjoulsae River.\n\nReports describe multiple titanic battles taking place around the Iliac Bay “simultaneously,” including clashes involving Orsinium, Wayrest, and Daggerfall in areas such as Gavaudon, Daenia, and the Ilessan Hills. The scale of destruction included firestorms that ignited forests and widespread decimation.\n\nWayrest’s court later implied they knew an ancient weapon would be activated and had attempted to buy it from a young adventurer, but when attacks began, they responded by sending armies—whose rapid travel and timing remain unexplained.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-warp-west-006",
+      "source": "UESP",
+      "title": "The Warp in the West — Aftermath and the “Miracle of Peace”",
+      "url": "https://en.uesp.net/wiki/Lore:Warp_in_the_West",
+      "text": "Result: 44 states → 4 kingdoms; Imperial loyalty; long-term political stabilization\n\nIn the immediate geopolitical aftermath, the Iliac Bay changed from forty-four independent regions to four major kingdoms—Daggerfall, Sentinel, Wayrest, and Orsinium—separated by blackened, desolate borderlands. Although smaller clashes continued for months, they were minor compared to the power unleashed during the Warp.\n\nIn later years the event was also called the “Miracle of Peace,” because despite immense death and destruction, the end state was a more stable Iliac Bay that remained loyal to the Empire. By 3E 433, the rulers of the four kingdoms were described as “ordained by the Nine,” and many Bretons interpreted the event as divine restoration—though the Blades strongly doubted a divine origin.\n\nKey consequences attributed to specific claimants:\n- Sentinel expanded along the northern coast of Hammerfell; after Queen Akorithis death, her son Lhotun ruled with reverence for Yokudan heritage and respect for Imperial ways.\n- Gortwogs Orsinium (often called Nova Orsinium) gained Imperial recognition, and Orcish citizens became more integrated across the Empire.\n- Mannimarco used the Totem/Mantella-related power to achieve apotheosis; in later years the Necromancers Moon was believed by his followers to embody his ascension.\n- Numidium vanished from Tamriel, and the Underking was not seen again. Some rumors claim the Underking reclaimed his heart, was annihilated along with Numidium, and created a wide anti-magic zone—though the exact location is unknown.\n- The mysterious Blades-associated agent/hero who found the Totem also disappeared amid the chaos.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-001",
+      "source": "UESP",
+      "title": "Indoril Nerevar — Early Life",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "Nerevars early life is mostly preserved through myth and conflicting traditions. Legends associate him with the “moon-and-star” symbol: some say he was born under a moon-and-star, others that he bore a moon-and-star birthmark, and some that his family standard carried the moon-and-star. Vivecs account frames Nerevar as of the same generation as Dagoth Ur and older than the Tribunal, and suggests he worked as a protector for a merchant caravan. During the late First Era, the Nords used armies and the thu’um to dominate Resdayn; after the War of Succession weakened them, Nerevar moved to seize the moment for rebellion.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-002",
+      "source": "UESP",
+      "title": "Indoril Nerevar — The Hortator and the First Council",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "Nerevar united disparate Chimer factions and became Hortator (their collective war leader). His alliance with the Dwemer was essential because Nordic power had not subdued Dwemeri underground cities; the alliance relied heavily on Nerevars personal bond with Dumac. Together, they repulsed the Nords at Red Mountain in 1E 416 and maintained cooperation for centuries. Dumac attended Nerevars wedding to Almalexia and gifted the swords Hopesfire and Trueflame (Trueflame becoming known as the Blade of Nerevar). Nerevar and Dumac later attended Emperor Gorieuss coronation as Resdayns representatives.\n\nKey relationships: Sotha Sil served as teacher/adviser; Vivec was a junior counselor; Voryn Dagoth was Lord High Councilor of House Dagoth (often described as loyal); Alandro Sul was Nerevars shield-companion. Traditions also describe Nerevar as Azuras champion: Azura blessed the Moon-and-Star ring so it would kill any wearer except Nerevar, and he swore to honor Ashlander ways, earning their allegiance.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-003",
+      "source": "UESP",
+      "title": "Indoril Nerevar — Vivecs Lessons and Mythic Deeds",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "Accounts in The 36 Lessons of Vivec place many mythic episodes during the era of the First Council. These stories portray extraordinary journeys and feats attributed to Nerevar and Vivec, including travel to distant lands and metaphysical teachings (e.g., claims about CHIM), as well as symbolic battles and pilgrimages described in vivid, allegorical language.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-004",
+      "source": "UESP",
+      "title": "Indoril Nerevar — War of the First Council Prelude",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "Voryn Dagoth learned of Kagrenacs plan to exploit the Heart of Lorkhan, which the Chimer would consider blasphemous. Dagoth warned Nerevar; when Nerevar confronted Dumac, the alliance fractured. Some sources suggest misunderstanding, implying Dumac may not have known the full plan until late. As war loomed, Nerevar again had to unify Chimer factions under his leadership. Despite Chimer skill in arms and magic, Dwemer technology made them a terrifying force, and the Chimer suffered defeats until they regrouped under Nerevar.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-005",
+      "source": "UESP",
+      "title": "Indoril Nerevar — Battle of Red Mountain and the Dwemer Disappearance",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "Nerevar orchestrated a climactic confrontation at Red Mountain using strategy and Ashlander scouts. The battle was a decisive Chimer victory but cost many lives, including Nerevars; his sword Trueflame was shattered and its fragments lost. The disappearance of the Dwemer is explained differently across traditions: Tribunal Temple teachings claim Nerevar (with Azura and the Tribunal) used the Heart of Lorkhan to make the Dwemer vanish, while other accounts hold the Dwemer destroyed themselves. Sources conflict regarding House Dagoths role and whether Voryn Dagoth remained loyal.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-006",
+      "source": "UESP",
+      "title": "Indoril Nerevar — Contested Accounts of His Death",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "How Nerevar died at Red Mountain is heavily disputed. Nordic traditions claim he was mortally wounded by Lorkhan and then feigned death to cut out the Heart and defeat the God of Mortals. Vivecs narrative implies Nerevar died from wounds received late in the battle, potentially involving Dumac and possibly Dagoth Ur. Ashlander belief holds that the Tribunal, seeking the Hearts power, poisoned a wounded Nerevar; this accusation is linked to Alandro Suls allegations after he was reportedly blinded and later lived among the Ashlanders.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-nerevar-007",
+      "source": "UESP",
+      "title": "Indoril Nerevar — Legacy, Oath, and Azuras Curse",
+      "url": "https://en.uesp.net/wiki/Lore:Indoril_Nerevar",
+      "text": "After Red Mountain, Nerevar insisted that Almalexia, Sotha Sil, and Vivec swear before Azura never to use Kagrenacs Tools in the profane way intended by the Dwemer. Later, the Tribunal broke this oath and used the Tools to take divine power; Azura appeared and cursed them, declaring that her champion Nerevar would return to punish their betrayal and that the Chimer would become Dunmer, sharing the Tribunals fate.\n\nThe dispute over Nerevars death and the Tribunals legitimacy created a long-lasting schism: Great Houses accepted the Tribunal as living gods, while Ashlanders condemned them as murderers and preserved older traditions. Cultural/iconographic legacy includes masks and Ordinator vestments depicting Nerevars visage, and some traditions even claim he was transformed into a Bonewalker and depicted that way on Temple shrines.",
+      "embedding": null
+    },
+      {
+      "id": "uesp-almalexia-001",
+      "source": "UESP",
+      "title": "Almalexia — Origins and Early Rule",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "Little is known of Almalexia before she became the wife of Indoril Nerevar. Temple myth claims that on Mount Assarnibibi, Molag Bal oversaw the ninety nine lovers of Boethiah who gave birth to her. She hailed from one of the Great Houses of Morrowind. Early in her life she ruled the capital city of Mournhold as queen. She operated an orphanage and commanded an orphan legion. She also led a faction known as the Shouts who carried out her will.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-almalexia-002",
+      "source": "UESP",
+      "title": "Almalexia — Formation of the First Council",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "Almalexia, also known as Ayem, played a central role in the formation of the First Council. Vivec emerged from a prophetic egg image delivered to her by Nerevar. Alongside Nerevar, Vivec, and Sotha Sil, she formed an alliance with the Dwemer to repel Nordic occupation. The Chimer and Dwemer defeated Nordic chieftains including Hoag Merkiller and Ysmir Wulfharth. After victory, the First Council was established. Almalexia wed Nerevar and received the twin blades Hopesfire and Trueflame from Dumac. Nerevar ruled as Hortator with Almalexia as queen.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-almalexia-003",
+      "source": "UESP",
+      "title": "Almalexia — War of the First Council and Red Mountain",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "The fall of the First Council culminated in the Battle of Red Mountain. Accounts differ. In Ashlander tradition, the Tribunal betrayed Nerevar after he refused to use Kagrenac tools for divine power. The Tribunal allegedly murdered him using poison and ritual deception. Vivec denies this version and claims Nerevar died of battle wounds. Nordic accounts describe the involvement of Shor and Wulfharth. In all versions, the Dwemer vanished and Nerevar died.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-almalexia-004",
+      "source": "UESP",
+      "title": "Almalexia — Ascension and Azura Curse",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "After Red Mountain, Sotha Sil learned how to use Kagrenac tools to tap into the Heart of Lorkhan. The Tribunal traveled to the Heart Chamber and became living gods known as Almsivi. Azura cursed them and transformed the Chimer into Dunmer, turning their skin ash gray and eyes red. Azura declared Nerevar would return to punish them. Almalexia viewed the transformation as a blessing of divine protection rather than a curse.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-almalexia-005",
+      "source": "UESP",
+      "title": "Almalexia — Role as Living Goddess",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "As a living god, Almalexia ruled Morrowind alongside Vivec and Sotha Sil. Resdayn became Morrowind. The Tribunal Temple dominated political and religious life. Almalexia was associated with midday mercy and served as patron of House Indoril. She commanded the Hands of Almalexia as her personal guard. She performed miracles, healed Corprus sufferers, inspired saints, and defended Morrowind from threats including Mehrunes Dagon and Akaviri invasions.",
+      "embedding": null
+    },
+    {
+      "id": "uesp-almalexia-006",
+      "source": "UESP",
+      "title": "Almalexia — Decline During Dagoth Ur Return",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "When Dagoth Ur awoke in 2E 882, he severed the Tribunal from the Heart of Lorkhan. Their divine power began to fade. The Great Ghostfence was built to contain him. The loss of Kagrenac tools Sunder and Keening weakened the Tribunal further. Almalexia grew harsher and withdrew from public life. Tension grew between her and Vivec. Her divinity diminished without access to the Heart.",
+      "embedding": null
+    },
+      {
+      "id": "uesp-almalexia-007",
+      "source": "UESP",
+      "title": "Almalexia — Madness and Death",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "As her divine power faded after losing access to the Heart of Lorkhan, Almalexia changed dramatically. Those few who still saw her observed that she no longer acted as the compassionate Lady of Mercy, but more as a hardened warrior queen. Those closest to her understood that she had become obsessed with preserving her divine image at any cost.\n\nIn place of fading godhood, she relied on ancient relics and Dwemer machinery to maintain fear and control. She used tonal devices to shroud Mournhold in ash storms, punishing her people for what she believed was failing faith. Her paranoia deepened into a singular goal: to become the one true god of the Dunmer, eliminating all rivals and uniting Morrowind under absolute authority.\n\nAfter the fall of Dagoth Ur in 3E 427, the Nerevarine arrived in Mournhold. Seeing him as both threat and opportunity, Almalexia devised a calculated scheme. She traveled to the Clockwork City and murdered Sotha Sil. She then unleashed mechanical constructs into Mournhold in order to frame him and position herself as savior.\n\nShe lured the Nerevarine into the Clockwork City, hoping the mechanical defenses would destroy him. When he survived, she confronted him directly. In battle, her remaining divine strength failed her. She was slain by the Nerevarine within the Clockwork City.\n\nIn her final moments she called Vivec a fool. Vivec, the last remaining Tribune, expressed sorrow rather than anger and later retrieved her body. He interred both Almalexia and Sotha Sil in proper Velothi fashion.\n\nAzura later declared that Almalexia death was a boon for Morrowind, claiming the Lady of Mercy would have betrayed the Dunmer as she had betrayed those closest to her. By 3E 432, Imperial reports stated that Almalexia, Dagoth Ur, Sotha Sil, and possibly Vivec were destroyed in what was termed the Nerevarine fury, and that the Nerevarine himself had vanished."
+    ,
+      "embedding": null
+    },
+    {
+      "id": "uesp-almalexia-008",
+      "source": "UESP",
+      "title": "Almalexia — Continued Worship and Legacy",
+      "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+      "text": "After her death, many Dunmer continued to believe she still lived. Over time the New Temple declared Tribunal worship misguided and restored reverence to the Reclamations including Boethiah. Some sects continued secret worship of Almalexia, including a hidden cult on Solstheim that built a statue in her honor. Though no longer worshiped as a living god, she is remembered as a saint of Dunmeri history.",
+      "embedding": null
+    },
+    {
+    "id": "uesp-almalexia-009",
     "source": "UESP",
-    "title": "Almalexia — Madness and Death",
+    "title": "Almalexia — Alandro Sul Account of Red Mountain and Nerevar Death",
     "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "As her divine power faded after losing access to the Heart of Lorkhan, Almalexia changed dramatically. Those few who still saw her observed that she no longer acted as the compassionate Lady of Mercy, but more as a hardened warrior queen. Those closest to her understood that she had become obsessed with preserving her divine image at any cost.\n\nIn place of fading godhood, she relied on ancient relics and Dwemer machinery to maintain fear and control. She used tonal devices to shroud Mournhold in ash storms, punishing her people for what she believed was failing faith. Her paranoia deepened into a singular goal: to become the one true god of the Dunmer, eliminating all rivals and uniting Morrowind under absolute authority.\n\nAfter the fall of Dagoth Ur in 3E 427, the Nerevarine arrived in Mournhold. Seeing him as both threat and opportunity, Almalexia devised a calculated scheme. She traveled to the Clockwork City and murdered Sotha Sil. She then unleashed mechanical constructs into Mournhold in order to frame him and position herself as savior.\n\nShe lured the Nerevarine into the Clockwork City, hoping the mechanical defenses would destroy him. When he survived, she confronted him directly. In battle, her remaining divine strength failed her. She was slain by the Nerevarine within the Clockwork City.\n\nIn her final moments she called Vivec a fool. Vivec, the last remaining Tribune, expressed sorrow rather than anger and later retrieved her body. He interred both Almalexia and Sotha Sil in proper Velothi fashion.\n\nAzura later declared that Almalexia death was a boon for Morrowind, claiming the Lady of Mercy would have betrayed the Dunmer as she had betrayed those closest to her. By 3E 432, Imperial reports stated that Almalexia, Dagoth Ur, Sotha Sil, and possibly Vivec were destroyed in what was termed the Nerevarine fury, and that the Nerevarine himself had vanished."
+    "text": "Alandro Sul, a shield companion of Nerevar who later lived among the Ashlanders, gave an account of events surrounding the War of the First Council and the Battle of Red Mountain. In his telling, Voryn Dagoth brought proof to Nerevar and the Tribunal that Kagrenac, the Dwemer high engineer, had discovered the Heart of Lorkhan and was using special tools to draw power from it in order to create a new god, the Numidium. Ayem, Almalexia, and the rest of the Tribunal urged war against the Dwemer for this sacrilege.\n\nWhile the Tribunal fought Dwemer forces in the open, Nerevar and Voryn Dagoth infiltrated the Heart Chamber. There they slew King Dumac and Kagrenac, but Dumac inflicted grievous wounds on Nerevar. Nerevar then summoned Azura, who taught Nerevar and Voryn how to use Kagrenac tools to sever the Heart power from the Dwemer. The Dwemer then turned to dust and disappeared as a people. Voryn Dagoth advised destroying the tools because of the danger they represented, but Nerevar chose to consult the Tribunal first.\n\nAccording to Sul, the Tribunal counseled Nerevar to use the tools to claim Resdayn and potentially the whole world for the Chimer. Nerevar was disturbed by this ambition and intended to summon Azura again. The Tribunal, now greedy for the Heart power, feigned the Azura summoning ritual and murdered Nerevar using poisoned ritual elements. In this version, Almalexia used poison candles, Sotha Sil used poisoned robes, and Vivec used poisoned invocations. Other imagined versions of the murder describe Vivec impaling Nerevar with Muatra, Sotha Sil severing his face, and Almalexia severing his feet.",
+    "embedding": null
+    }, 
+    {
+    "id": "uesp-almalexia-010",
+    "source": "UESP",
+    "title": "Almalexia — The Three in One and Almsivi Rule of Morrowind",
+    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+    "text": "After Red Mountain, Almsivi became the god kings of the Dunmer and reshaped society. The name Resdayn was replaced and the province became known as Morrowind. Of the seven Great Houses associated with the First Council era, the legacies of House Dwemer and House Dagoth were erased by Almsivi. The Grand Council continued with five houses, but the Tribunal Temple became the dominant power in Morrowind.\n\nEach Living God had a city dedicated to their worship, with alternate names used to distinguish the city from the deity who resided within it. Almalexia was associated with Mournhold, Sotha Sil with the Clockwork City, and Vivec with Vivec City. Each also maintained an honor guard: the Hands of Almalexia served Almalexia, the Clockwork Apostles served Sotha Sil, and the Buoyant Armigers served Vivec.\n\nThe Tribunes were also linked to Great Houses in temperament and sympathy. Almalexia aligned most closely with House Indoril and its secure serenity. Sotha Sil was associated with the unconventional and iconoclastic disposition of House Telvanni. Vivec was associated with House Redoran and its focus on creeds and deeds. They were further symbolized as times of day: Sotha Sil as the morning sun, Almalexia as midday mercy, and Vivec as a star spun night.\n\nIn Vivec sermon based metaphysics, Ayem is described as the Mother, active and clawed like a nix hound, and portrayed as a key force in the fate of Morrowind and the splendor of the stars. Vivec is often described as the most public and popular Tribune, especially on Vvardenfell, though some accounts claim Almalexia was the most beloved, and some suggest Sotha Sil was at times equally public.\n\nEarly in their reign, Almsivi faced major threats and crises. One of the first tests was an attempted vengeance by Ash King Wulfharth, who raised an army and storm to destroy the Tribunal, but the unified Dunmer under Almsivi repelled him. Almsivi also guided the Dunmer through the Middle Dawn crisis, with traditions describing signs in the heavens and protective wards against harm. Mannimarco later listed Almsivi among those able to identify their location during the Dragon Break.\n\nIn 1E 2703, the Tsaesci of Akavir passed through Morrowind during their invasion toward Cyrodiil. The Tribunal and Reman aligned forces to defeat the invaders. After victory, Reman integrated many Tsaesci veterans into his armies and personal service.",
+    "embedding": null
+    },
+    {
+    "id": "uesp-almalexia-011",
+    "source": "UESP",
+    "title": "Almalexia — The Lady of Mercy and Divine Protector of Morrowind",
+    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
+    "text": "Almalexia, known as the Lady of Mercy, wielded her divine power for the protection and benefit of the Dunmer for thousands of years. While Sotha Sil remained distant and mysterious, and Vivec often took a philosophical role, Almalexia actively walked among her people throughout the First and Second Eras. She was widely regarded as compassionate, protective, and deeply involved in the daily lives of her followers.\n\nHer blessings were said to perform extraordinary miracles. It was believed that her grace could protect individuals infected with Corprus from suffering its worst effects. Saint Felms the Bold claimed to be guided by her voice. Her personal guard, the Hands of Almalexia, were considered among the greatest warriors in Tamriel. Unlike Vivec, whose writings were metaphysical and complex, Almalexia composed moral fables and works intended to nurture virtue among the Dunmer.\n\nIn 1E 2920, long before the Oblivion Crisis of the Fourth Era, Mehrunes Dagon manifested and destroyed the city of Mournhold. Almalexia and Sotha Sil confronted him in open battle. After an immense struggle amid fire and devastation, they defeated and banished the Daedric Prince. This event demonstrated that Almalexia was capable of directly combating and overcoming a Daedric Prince centuries before the Empire would later face Dagon during the Oblivion Crisis. Some accounts suggest she foresaw in dreams both the end of the Four Score War and the eventual fall of the Reman Dynasty.\n\nIn 2E 572, Almalexia fought during the Akaviri invasion of northern Tamriel. She battled alongside Wulfharth, also called the Underking, against Ada Soom Dir Kamal. Accounts differ on details. Some sources claim she summoned the Underking, while others credit the Greybeards. Some state the battle occurred at Stonefalls, others at Red Mountain. Regardless of location, the invasion was repelled.\n\nFollowing this conflict, Almalexia strongly supported the formation of the Ebonheart Pact, persuading most Great Houses except Telvanni to join. During the Alliance War of 2E 582, she suppressed the Maulborn cult in Deshaan, who sought to overthrow the Tribunal and restore Daedra worship. Their leader, Magistrix Urili Vox, had once served Almalexia but turned against her. The rebellion was crushed, reinforcing Almalexia image as protector and divine ruler of Morrowind.",
+    "embedding": null
+    },
+    {
+    "id": "uesp-house-redoran-001",
+    "source": "UESP",
+    "title": "House Redoran — Structure, Territory, and Ideology",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Redoran, also known as Clan Redoran, the Red Party of Redoran, or Red Hats, is one of the five remaining Great Houses of the Dunmer. Led by the House Archmaster, it governs the Redoran District of northwestern Morrowind from the city of Blacklight near the Skyrim border.\n\nDuring 2E 582, its council seat on Vvardenfell was located in Balmora, and by 3E 427 it had moved to Aldruhn. In Aldruhn, councilors lived within the hollowed shell of a massive prehistoric Emperor Crab in the district known as Aldruhn under Skar. Other Redoran controlled settlements included Cormaris View and Silgrad Tower on the mainland, and Khuul, Maar Gan, and Ald Velothi on Vvardenfell.\n\nIn the mid Second Era, House Redoran controlled Balmora, Suran, and Gnisis, maintained a garrison in Molag Mar, and held a strong military presence in early Vivec City. Prior to the destruction of Vivec City in 4E 5, House Redoran controlled a canton within the city. Mainland holdings also included Tal Deic Fortress, Serkamora village, and the Darkshade Caverns kwama mines. During the Daggerfall Covenant invasion of Stonefalls, Redoran Sentinels patrolled Old Ebonheart even though it was under House Dres rule.\n\nHouse Redoran emphasizes Dunmeri tradition, piety, and the warrior way. It has long functioned as the de facto military power of Morrowind. Members often view themselves as superior to other Great Houses due to their discipline and honor. The Tribunal Temple was historically a natural ally, and many of Vivec Buoyant Armigers came from House Redoran.\n\nHouse Redoran maintained strained relationships with the Ashlander tribes, the Morag Tong, House Hlaalu, and House Telvanni. They respected House Indoril and were willing to fight alongside House Dres. During the Third Empire, they held mutual respect for the Fighters Guild and the Imperial Legion, but regarded the Mages Guild, Thieves Guild, and Imperial Cult with skepticism. Like other Great Houses, they opposed the Sixth House cultists, vampires of Vvardenfell, and the criminal activities of the Camonna Tong.",
+    "embedding": null
+    },
+    {
+    "id": "uesp-house-hlaalu-001",
+    "source": "UESP",
+    "title": "House Hlaalu — Politics, Expansion, and Fall from Great House Status",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Hlaalu, also known as Clan Hlaalu, the Yellow Party of Hlaalu, or Yellow Hats, was formerly one of the five traditional Great Houses of the settled Dunmer. It governed the Hlaalu District of western central Morrowind from its capital at Narsis and was ruled by a leader known as the High Hlaalu.\n\nDuring the Second Era, House Hlaalu presence on Vvardenfell was limited to the port town of Seyda Neen. By the late Third Era, the house expanded significantly. Its council seat was established in Balmora, formerly a Redoran city. Other Hlaalu controlled towns included Suran, Hla Oad, and Gnaar Mok. On the mainland, Hlaalu acquired the former Dres cities of Ebonheart and Kragenmoor.\n\nIn the early Fourth Era, after the Empire released Morrowind, anti Imperial sentiment combined with House Hlaalu strong association with Imperial rule led to its removal as a Great House. House Hlaalu was stripped of its seat on the Grand Council and replaced by House Sadras.\n\nHouse Hlaalu was characterized as adaptable and opportunistic. Business and diplomacy were its primary concerns. Profit was important, but traditional Hlaalu culture recognized that reputation could be more valuable than gold. They were known as skilled negotiators and intelligent traders. However, many members were also considered easily bribed or politically flexible. Retainers of House Hlaalu were often proficient in stealth, lock picking, blackmail, manipulation, and covert operations.\n\nUnlike some other Great Houses, House Hlaalu was distinguished by its willingness to live in relative harmony with other races, making it less xenophobic than many of its peers. This trait strengthened ties with the Empire and Imperial institutions.\n\nRelations with other factions were frequently strained. While the Tribunal Temple maintained an overall positive relationship with House Hlaalu, animosity often existed between Hlaalu and Houses Indoril, Dres, Telvanni, and Redoran, though formal alliances occurred at times. Like other Great Houses, relations with Ashlander tribes were strained, and they opposed Sixth House cultists and vampires.\n\nDuring the Third Era, House Hlaalu maintained strong ties with Imperial institutions including the Fighters Guild, Mages Guild, Imperial Cult, and Imperial Legion. They also had a notably positive relationship with the Camonna Tong crime syndicate, while showing less approval toward the Thieves Guild.\n\nHouse Hlaalu adopted the merchants scale as their heraldry, symbolizing their mercantile dominance. The color yellow represented the house, and their emblem was commonly called the Golden Scales. Saint Veloth the Pilgrim was regarded as the patron saint of House Hlaalu."
   ,
     "embedding": null
   },
   {
-    "id": "uesp-almalexia-008",
+    "id": "uesp-house-telvanni-001",
     "source": "UESP",
-    "title": "Almalexia — Continued Worship and Legacy",
-    "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-    "text": "After her death, many Dunmer continued to believe she still lived. Over time the New Temple declared Tribunal worship misguided and restored reverence to the Reclamations including Boethiah. Some sects continued secret worship of Almalexia, including a hidden cult on Solstheim that built a statue in her honor. Though no longer worshiped as a living god, she is remembered as a saint of Dunmeri history.",
+    "title": "House Telvanni — Wizard Lords and Isolationist Great House",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Telvanni, also known as Clan Telvanni or the Brown Party of Telvanni, is one of the Great Houses of Morrowind. It governs the Telvanni District of northeastern Morrowind, including the eastern portion of Vvardenfell, from its council seat in Sadrith Mora. Major settlements include Tel Mothrivra and Port Telvannis, where the Great House leadership known as the Parliament of Bugs resides. In earlier eras they controlled strongholds on the Telvanni Peninsula, but by the Fourth Era they no longer held mainland territory.\n\nHouse Telvanni values talent, arcane knowledge, and individual initiative. It is primarily composed of wizard lords who live in towering mushroom structures and rule over small villages. These wizard lords typically isolate themselves in pursuit of magical mastery. Telvanni culture emphasizes independence and self sufficiency. They avoid broader political entanglements and prefer to be left alone to conduct research and rule their lands without interference.\n\nThe wizard lords maintain security through personal retainers and mercenaries, generally leaving commoners to manage their own affairs. Advancement within House Telvanni can occur through strength, cunning, or eliminating rivals. Stealing from another Telvanni is considered proof of superiority if one can succeed. While most Telvanni prefer isolation, a minority known as rogue Telvanni are ambitious and aggressive, competing for arcane power and influence on Vvardenfell. The House publicly denies official support of these rogue settlements.\n\nHouse Telvanni is often described as the most xenophobic of the Dunmer Great Houses. They shun outsiders, prefer isolation on remote coasts and rocky islands, and rarely involve themselves in outside affairs. Historically, House Indoril dominated their mainland borders for millennia due to Indoril association with the Tribunal, contributing to Telvanni geographic isolation. The Telvanni typically avoid interaction with other Houses and Guilds.\n\nThey have longstanding hostility toward Abolitionists and the Imperial Mages Guild, particularly resisting the Guild monopoly on magical practice during the Third Era. Despite being disliked by most factions on Vvardenfell by 3E 427, the Telvanni did not share the widespread hatred of vampires common among other factions. Telvanni lords and their Mouths were willing to speak with vampires, and Telvanni wizards did not fear them as other people did."
+  ,
     "embedding": null
   },
   {
-  "id": "uesp-almalexia-009",
-  "source": "UESP",
-  "title": "Almalexia — Alandro Sul Account of Red Mountain and Nerevar Death",
-  "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-  "text": "Alandro Sul, a shield companion of Nerevar who later lived among the Ashlanders, gave an account of events surrounding the War of the First Council and the Battle of Red Mountain. In his telling, Voryn Dagoth brought proof to Nerevar and the Tribunal that Kagrenac, the Dwemer high engineer, had discovered the Heart of Lorkhan and was using special tools to draw power from it in order to create a new god, the Numidium. Ayem, Almalexia, and the rest of the Tribunal urged war against the Dwemer for this sacrilege.\n\nWhile the Tribunal fought Dwemer forces in the open, Nerevar and Voryn Dagoth infiltrated the Heart Chamber. There they slew King Dumac and Kagrenac, but Dumac inflicted grievous wounds on Nerevar. Nerevar then summoned Azura, who taught Nerevar and Voryn how to use Kagrenac tools to sever the Heart power from the Dwemer. The Dwemer then turned to dust and disappeared as a people. Voryn Dagoth advised destroying the tools because of the danger they represented, but Nerevar chose to consult the Tribunal first.\n\nAccording to Sul, the Tribunal counseled Nerevar to use the tools to claim Resdayn and potentially the whole world for the Chimer. Nerevar was disturbed by this ambition and intended to summon Azura again. The Tribunal, now greedy for the Heart power, feigned the Azura summoning ritual and murdered Nerevar using poisoned ritual elements. In this version, Almalexia used poison candles, Sotha Sil used poisoned robes, and Vivec used poisoned invocations. Other imagined versions of the murder describe Vivec impaling Nerevar with Muatra, Sotha Sil severing his face, and Almalexia severing his feet.",
-  "embedding": null
-  }, 
-  {
-  "id": "uesp-almalexia-010",
-  "source": "UESP",
-  "title": "Almalexia — The Three in One and Almsivi Rule of Morrowind",
-  "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-  "text": "After Red Mountain, Almsivi became the god kings of the Dunmer and reshaped society. The name Resdayn was replaced and the province became known as Morrowind. Of the seven Great Houses associated with the First Council era, the legacies of House Dwemer and House Dagoth were erased by Almsivi. The Grand Council continued with five houses, but the Tribunal Temple became the dominant power in Morrowind.\n\nEach Living God had a city dedicated to their worship, with alternate names used to distinguish the city from the deity who resided within it. Almalexia was associated with Mournhold, Sotha Sil with the Clockwork City, and Vivec with Vivec City. Each also maintained an honor guard: the Hands of Almalexia served Almalexia, the Clockwork Apostles served Sotha Sil, and the Buoyant Armigers served Vivec.\n\nThe Tribunes were also linked to Great Houses in temperament and sympathy. Almalexia aligned most closely with House Indoril and its secure serenity. Sotha Sil was associated with the unconventional and iconoclastic disposition of House Telvanni. Vivec was associated with House Redoran and its focus on creeds and deeds. They were further symbolized as times of day: Sotha Sil as the morning sun, Almalexia as midday mercy, and Vivec as a star spun night.\n\nIn Vivec sermon based metaphysics, Ayem is described as the Mother, active and clawed like a nix hound, and portrayed as a key force in the fate of Morrowind and the splendor of the stars. Vivec is often described as the most public and popular Tribune, especially on Vvardenfell, though some accounts claim Almalexia was the most beloved, and some suggest Sotha Sil was at times equally public.\n\nEarly in their reign, Almsivi faced major threats and crises. One of the first tests was an attempted vengeance by Ash King Wulfharth, who raised an army and storm to destroy the Tribunal, but the unified Dunmer under Almsivi repelled him. Almsivi also guided the Dunmer through the Middle Dawn crisis, with traditions describing signs in the heavens and protective wards against harm. Mannimarco later listed Almsivi among those able to identify their location during the Dragon Break.\n\nIn 1E 2703, the Tsaesci of Akavir passed through Morrowind during their invasion toward Cyrodiil. The Tribunal and Reman aligned forces to defeat the invaders. After victory, Reman integrated many Tsaesci veterans into his armies and personal service.",
-  "embedding": null
+    "id": "uesp-house-indoril-001",
+    "source": "UESP",
+    "title": "House Indoril — Temple Hegemony and Political Dominance of Morrowind",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Indoril, also known as Clan Indoril or the Blue Party of Indoril, is one of the five Great Houses of the Dunmer. It governs the Indoril District in the heartland of Morrowind from its ancestral capital of Mournhold, which served as the capital of Morrowind until the Fourth Era.\n\nThe Indoril District includes east central lands south and east of the Inner Sea, encompassing large portions of eastern Stonefalls and Deshaan, fertile river valleys, parts of the Telvanni Peninsula, and stretches of the eastern coastline along the Padomaic Ocean. The house also controls several islands, including Gorne. Notable settlements historically associated with Indoril include Davon Watch near Bal Foyen. Although House Indoril has never claimed territory on Vvardenfell, ancestral tombs of Indoril families remain there.\n\nHouse Indoril has long been the most orthodox and conservative supporter of the Tribunal Temple. Claiming kinship with the Tribunal and tracing its heritage to Indoril Nerevar, the Hortator of the First Council, the house dominated Temple authority for thousands of years. Through its control of the Tribunal priesthood, House Indoril exercised political and religious power across Morrowind, effectively guiding provincial governance for approximately three thousand years.\n\nDuring the First and Second Eras, House Indoril held undisputed hegemony over Morrowind. Their dominance was closely tied to the Temple, and through it their influence extended beyond their geographic borders. This long period of supremacy ended with the signing of Tiber Septim Armistice, which curtailed Indoril uninterrupted control.\n\nAs of the Fourth Era, House Indoril is considered effectively unified with the New Temple, continuing its historical role as the religious and cultural center of Dunmer society."
+  ,
+    "embedding": null
   },
   {
-  "id": "uesp-almalexia-011",
-  "source": "UESP",
-  "title": "Almalexia — The Lady of Mercy and Divine Protector of Morrowind",
-  "url": "https://en.uesp.net/wiki/Lore:Almalexia",
-  "text": "Almalexia, known as the Lady of Mercy, wielded her divine power for the protection and benefit of the Dunmer for thousands of years. While Sotha Sil remained distant and mysterious, and Vivec often took a philosophical role, Almalexia actively walked among her people throughout the First and Second Eras. She was widely regarded as compassionate, protective, and deeply involved in the daily lives of her followers.\n\nHer blessings were said to perform extraordinary miracles. It was believed that her grace could protect individuals infected with Corprus from suffering its worst effects. Saint Felms the Bold claimed to be guided by her voice. Her personal guard, the Hands of Almalexia, were considered among the greatest warriors in Tamriel. Unlike Vivec, whose writings were metaphysical and complex, Almalexia composed moral fables and works intended to nurture virtue among the Dunmer.\n\nIn 1E 2920, long before the Oblivion Crisis of the Fourth Era, Mehrunes Dagon manifested and destroyed the city of Mournhold. Almalexia and Sotha Sil confronted him in open battle. After an immense struggle amid fire and devastation, they defeated and banished the Daedric Prince. This event demonstrated that Almalexia was capable of directly combating and overcoming a Daedric Prince centuries before the Empire would later face Dagon during the Oblivion Crisis. Some accounts suggest she foresaw in dreams both the end of the Four Score War and the eventual fall of the Reman Dynasty.\n\nIn 2E 572, Almalexia fought during the Akaviri invasion of northern Tamriel. She battled alongside Wulfharth, also called the Underking, against Ada Soom Dir Kamal. Accounts differ on details. Some sources claim she summoned the Underking, while others credit the Greybeards. Some state the battle occurred at Stonefalls, others at Red Mountain. Regardless of location, the invasion was repelled.\n\nFollowing this conflict, Almalexia strongly supported the formation of the Ebonheart Pact, persuading most Great Houses except Telvanni to join. During the Alliance War of 2E 582, she suppressed the Maulborn cult in Deshaan, who sought to overthrow the Tribunal and restore Daedra worship. Their leader, Magistrix Urili Vox, had once served Almalexia but turned against her. The rebellion was crushed, reinforcing Almalexia image as protector and divine ruler of Morrowind.",
-  "embedding": null
+    "id": "uesp-house-dres-001",
+    "source": "UESP",
+    "title": "House Dres — Agrarian Power and Slaveholding Great House",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Dres, also known as Clan Dres, is one of the Great Houses of Morrowind and maintains holdings exclusively on the mainland. It governs the Dres District of southeastern Morrowind from its ancestral capital of Tear, located near the border of Black Marsh. The district includes parts of the fertile Deshaan plains, southern areas of the Telvanni Peninsula, and borders the Indoril and Hlaalu Districts as well as the marshlands of Shadowfen and Thornmarsh.\n\nDuring the mid Second Era, House Dres controlled the cities of Ebonheart and Kragenmoor in central Morrowind. At least once, it gained a limited foothold in Telvanni territory. House Dres has no recorded settlements on Vvardenfell, though ancient Dres families once lived there before relocating to the mainland, and ancestral tombs remain on the island.\n\nHouse Dres was formally established as a Great House before the middle of the First Era by Grandmaster Thalthil Dres following a slave raid over Thorn. The house developed into a wealthy agrarian society centered on large scale saltrice plantations across the plains and marshlands surrounding Tear.\n\nHouse Dres became infamous for its extensive slave trade. It supplied large numbers of slaves, primarily Argonians and Khajiit, to other Great Houses, maintaining vast slave pens in Tear and across plantation lands. In this respect, it rivaled Houses Indoril and Telvanni in slave holdings.\n\nCulturally, House Dres maintains a strong tradition of Daedra worship and ancestor reverence. Unlike some other Great Houses, Dres places emphasis on unity between the houses and the overall improvement of Dunmeri society. Despite its reputation for slavery, it is also known for valuing inter house diplomacy and cooperation."
+  ,
+    "embedding": null
   },
   {
-  "id": "uesp-house-redoran-001",
-  "source": "UESP",
-  "title": "House Redoran — Structure, Territory, and Ideology",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Redoran, also known as Clan Redoran, the Red Party of Redoran, or Red Hats, is one of the five remaining Great Houses of the Dunmer. Led by the House Archmaster, it governs the Redoran District of northwestern Morrowind from the city of Blacklight near the Skyrim border.\n\nDuring 2E 582, its council seat on Vvardenfell was located in Balmora, and by 3E 427 it had moved to Aldruhn. In Aldruhn, councilors lived within the hollowed shell of a massive prehistoric Emperor Crab in the district known as Aldruhn under Skar. Other Redoran controlled settlements included Cormaris View and Silgrad Tower on the mainland, and Khuul, Maar Gan, and Ald Velothi on Vvardenfell.\n\nIn the mid Second Era, House Redoran controlled Balmora, Suran, and Gnisis, maintained a garrison in Molag Mar, and held a strong military presence in early Vivec City. Prior to the destruction of Vivec City in 4E 5, House Redoran controlled a canton within the city. Mainland holdings also included Tal Deic Fortress, Serkamora village, and the Darkshade Caverns kwama mines. During the Daggerfall Covenant invasion of Stonefalls, Redoran Sentinels patrolled Old Ebonheart even though it was under House Dres rule.\n\nHouse Redoran emphasizes Dunmeri tradition, piety, and the warrior way. It has long functioned as the de facto military power of Morrowind. Members often view themselves as superior to other Great Houses due to their discipline and honor. The Tribunal Temple was historically a natural ally, and many of Vivec Buoyant Armigers came from House Redoran.\n\nHouse Redoran maintained strained relationships with the Ashlander tribes, the Morag Tong, House Hlaalu, and House Telvanni. They respected House Indoril and were willing to fight alongside House Dres. During the Third Empire, they held mutual respect for the Fighters Guild and the Imperial Legion, but regarded the Mages Guild, Thieves Guild, and Imperial Cult with skepticism. Like other Great Houses, they opposed the Sixth House cultists, vampires of Vvardenfell, and the criminal activities of the Camonna Tong.",
-  "embedding": null
+    "id": "uesp-house-sadras-001",
+    "source": "UESP",
+    "title": "House Sadras — Fourth Era Great House Replacement of Hlaalu",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Sadras is one of the five Great Houses of Morrowind in the Fourth Era. Following the Oblivion Crisis in 3E 433 and the eruption of Red Mountain in 4E 5, major political changes occurred in Morrowind. Anti Imperial sentiment grew after the Empire withdrawal from the province, and House Hlaalu was stripped of its status as a Great House due to its close association with Imperial rule.\n\nHouse Sadras was selected to replace House Hlaalu as the fifth member of the Grand Council of Morrowind. Little is known about House Sadras prior to this elevation. Its earlier territorial holdings, political influence, and role in previous eras remain largely undocumented. Despite this obscurity, House Sadras emerged in the Fourth Era as a recognized Great House within the restored Dunmer political structure."
+  ,
+    "embedding": null
   },
   {
-  "id": "uesp-house-hlaalu-001",
+    "id": "uesp-morrowind-fourth-era-politics-001",
+    "source": "UESP",
+    "title": "Morrowind — Fourth Era Political Climate After Red Year and Argonian Invasion",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "Following the eruption of Red Mountain in 4E 5, which devastated Vvardenfell, Morrowind entered a severe political and social crisis. In the aftermath, Argonians from Black Marsh invaded Morrowind. The disasters and invasion reshaped Great House power and forced major changes in governance.\n\nHouse Hlaalu, due to its close association with the Imperial administration, became a scapegoat for Dunmer suffering. As a result, House Hlaalu was stripped of Great House status and removed from the Grand Council. The previously unknown House Sadras was selected to fill the vacant fifth seat on the Council.\n\nHouse Telvanni suffered massive losses. Many Telvanni settlements on Vvardenfell were destroyed by the Red Year, and the Argonian invasion nearly finished the house. One report claims the last mainland settlement fell to the Argonians. Survivors reportedly escaped aboard a ship called The Pride of Tel Vos, later found wrecked in Skyrim. A child described as the last of the Telvanni family line was raised in Black Marsh under the Argonian name Brand Shei. Despite these setbacks, Telvanni survivors endured, including those associated with Master Neloth, who helped reestablish a presence on Solstheim. Telvanni appears to have recovered enough to retain its seat on the Dunmer council.\n\nHouse Indoril had been declining since the end of the Second Era. The fall of the Tribunal Temple near the end of the Third Era, combined with the political actions of King Helseth and his Dres allies, weakened Indoril severely. Their capital of Mournhold was later sacked by invading Argonians. House Indoril still exists and holds a seat on the Council, but its political identity became effectively merged with the New Temple. Those who become priests are regarded as having joined Indoril, and Indoril authority is now largely expressed through the New Temple priesthood.\n\nHouse Dres status in the Fourth Era is less clearly defined, but as the southernmost Great House and historically central to the slave trade, it likely suffered heavily during the Argonian invasion. Despite this, House Dres retained its seat on the Grand Council, indicating it survived with meaningful power intact.\n\nHouse Redoran rose to become the dominant political and military power in Morrowind due to its leadership during the Oblivion Crisis, the Red Year, and the Argonian invasion. Redoran assumed leadership of the Grand Council and moved the capital to Blacklight. The Council now meets in Blacklight within the Rootspire, reflecting Redoran ascendancy and the diminished role of Mournhold after its sack.",
+    "embedding": null
+  },
+  {
+    "id": "uesp-house-dagoth-001",
+    "source": "UESP",
+    "title": "House Dagoth — The Sixth House and Rise of Dagoth Ur",
+    "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
+    "text": "House Dagoth, also known as Clan Dagoth, the Sixth House, Shadow House, Sleeping House, Lost House, Traitor House, House of Lord Dagoth, and the Tribe Unmourned, was the defunct sixth Great House of the Chimer. It was led by Voryn Dagoth, who later became known as Dagoth Ur. The house ancient homeland was located in what later became Vvardenfell, and its capital was Kogoruhn, the only Great House capital situated in that region.\n\nDuring the War of the First Council in the First Era, House Dagoth was accused of betraying the other Great Houses and allying with the Dwemer. Some conflicting sources claim they instead fought against the Dwemer. Regardless of the truth, House Dagoth was branded a traitor house. After the Battle of Red Mountain, the house was destroyed. Records of its existence were erased, and its surviving members were either killed or absorbed into other Great Houses.\n\nUnknown to most, Voryn Dagoth survived beneath Red Mountain. Over centuries he slowly rebuilt his strength and influence from within the mountain. Eventually he forged a connection to the Heart of Lorkhan and drew divine power from it, much like the Tribunal had done. Dagoth Ur sought to overthrow the Tribunal and conquer Morrowind.\n\nAs part of his plans, Dagoth Ur attempted to recreate the Dwemer god construct Numidium in the form of Akulakhan. In 3E 427, the Nerevarine destroyed the Heart of Lorkhan, severing Dagoth Ur power and killing him. With his death, the Sixth House threat was ended and House Dagoth remained extinct.",
+    "embedding": null
+  },
+  {
+    "id": "vivec_overview_001",
+    "source": "UESP",
+    "title": "Vivec - Warrior-Poet of the Dunmer",
+    "url": "https://en.uesp.net/wiki/Lore:Vivec",
+    "text": "Vivec, also spelled Vivek, or Vehk, was the Warrior-Poet deity of the Dunmer and Vi in the AlmSiVi. He was the Guardian God-King of the holy land of Vvardenfell and the ever-vigilant protector from the dark gods of Red Mountain, which was considered the gate to hell. He was also called the Master of Morrowind. Though aspects of his past are blurred by time and some of his more controversial decisions remain debated, Vivec represented the spirit and duality of the Dunmer people, reflected in his half-Dunmer and half-Chimer appearance.",
+    "embedding": null
+  },
+  {
+  "id": "vivec_works_002",
   "source": "UESP",
-  "title": "House Hlaalu — Politics, Expansion, and Fall from Great House Status",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Hlaalu, also known as Clan Hlaalu, the Yellow Party of Hlaalu, or Yellow Hats, was formerly one of the five traditional Great Houses of the settled Dunmer. It governed the Hlaalu District of western central Morrowind from its capital at Narsis and was ruled by a leader known as the High Hlaalu.\n\nDuring the Second Era, House Hlaalu presence on Vvardenfell was limited to the port town of Seyda Neen. By the late Third Era, the house expanded significantly. Its council seat was established in Balmora, formerly a Redoran city. Other Hlaalu controlled towns included Suran, Hla Oad, and Gnaar Mok. On the mainland, Hlaalu acquired the former Dres cities of Ebonheart and Kragenmoor.\n\nIn the early Fourth Era, after the Empire released Morrowind, anti Imperial sentiment combined with House Hlaalu strong association with Imperial rule led to its removal as a Great House. House Hlaalu was stripped of its seat on the Grand Council and replaced by House Sadras.\n\nHouse Hlaalu was characterized as adaptable and opportunistic. Business and diplomacy were its primary concerns. Profit was important, but traditional Hlaalu culture recognized that reputation could be more valuable than gold. They were known as skilled negotiators and intelligent traders. However, many members were also considered easily bribed or politically flexible. Retainers of House Hlaalu were often proficient in stealth, lock picking, blackmail, manipulation, and covert operations.\n\nUnlike some other Great Houses, House Hlaalu was distinguished by its willingness to live in relative harmony with other races, making it less xenophobic than many of its peers. This trait strengthened ties with the Empire and Imperial institutions.\n\nRelations with other factions were frequently strained. While the Tribunal Temple maintained an overall positive relationship with House Hlaalu, animosity often existed between Hlaalu and Houses Indoril, Dres, Telvanni, and Redoran, though formal alliances occurred at times. Like other Great Houses, relations with Ashlander tribes were strained, and they opposed Sixth House cultists and vampires.\n\nDuring the Third Era, House Hlaalu maintained strong ties with Imperial institutions including the Fighters Guild, Mages Guild, Imperial Cult, and Imperial Legion. They also had a notably positive relationship with the Camonna Tong crime syndicate, while showing less approval toward the Thieves Guild.\n\nHouse Hlaalu adopted the merchants scale as their heraldry, symbolizing their mercantile dominance. The color yellow represented the house, and their emblem was commonly called the Golden Scales. Saint Veloth the Pilgrim was regarded as the patron saint of House Hlaalu."
-,
+  "title": "The Works and Teachings of Vivec",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "The Warrior-Poet spent his long life creating numerous works and wonders. He was a prolific writer, most famously associated with the 36 Lessons of Vivec, a series of cryptic texts that are widely interpreted in many ways. These writings were believed to serve as guidance for the prophesized Nerevarine. Numerous artifacts were associated with Vivec, including his legendary spear Muatra. For hundreds or possibly thousands of years, he resided at the peak of his palace in the city that bore his name, Vivec. Pilgrims and travelers from across Morrowind visited his holy city daily.",
+  "embedding": null
+  },
+
+  {
+  "id": "vivec_fall_003",
+  "source": "UESP",
+  "title": "Loss of Divinity and Disappearance",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Vivec guided and protected the Dunmer people for centuries until the end of the Third Era when he lost his divinity and later disappeared. This loss of power was a sacrifice he both accepted and helped bring about. After his disappearance, the Tribunal Temple collapsed and the religious structure of Morrowind changed. In later years, the New Temple referred to him as Saint Vivec and classified him as a member of the False Tribunal.",
   "embedding": null
 },
 {
-  "id": "uesp-house-telvanni-001",
+  "id": "vivec_titles_004",
   "source": "UESP",
-  "title": "House Telvanni — Wizard Lords and Isolationist Great House",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Telvanni, also known as Clan Telvanni or the Brown Party of Telvanni, is one of the Great Houses of Morrowind. It governs the Telvanni District of northeastern Morrowind, including the eastern portion of Vvardenfell, from its council seat in Sadrith Mora. Major settlements include Tel Mothrivra and Port Telvannis, where the Great House leadership known as the Parliament of Bugs resides. In earlier eras they controlled strongholds on the Telvanni Peninsula, but by the Fourth Era they no longer held mainland territory.\n\nHouse Telvanni values talent, arcane knowledge, and individual initiative. It is primarily composed of wizard lords who live in towering mushroom structures and rule over small villages. These wizard lords typically isolate themselves in pursuit of magical mastery. Telvanni culture emphasizes independence and self sufficiency. They avoid broader political entanglements and prefer to be left alone to conduct research and rule their lands without interference.\n\nThe wizard lords maintain security through personal retainers and mercenaries, generally leaving commoners to manage their own affairs. Advancement within House Telvanni can occur through strength, cunning, or eliminating rivals. Stealing from another Telvanni is considered proof of superiority if one can succeed. While most Telvanni prefer isolation, a minority known as rogue Telvanni are ambitious and aggressive, competing for arcane power and influence on Vvardenfell. The House publicly denies official support of these rogue settlements.\n\nHouse Telvanni is often described as the most xenophobic of the Dunmer Great Houses. They shun outsiders, prefer isolation on remote coasts and rocky islands, and rarely involve themselves in outside affairs. Historically, House Indoril dominated their mainland borders for millennia due to Indoril association with the Tribunal, contributing to Telvanni geographic isolation. The Telvanni typically avoid interaction with other Houses and Guilds.\n\nThey have longstanding hostility toward Abolitionists and the Imperial Mages Guild, particularly resisting the Guild monopoly on magical practice during the Third Era. Despite being disliked by most factions on Vvardenfell by 3E 427, the Telvanni did not share the widespread hatred of vampires common among other factions. Telvanni lords and their Mouths were willing to speak with vampires, and Telvanni wizards did not fear them as other people did."
-,
+  "title": "Titles and Symbolism of Vivec",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Vivec held many titles during his long rule over Morrowind. His nature as both artist and warrior earned him the title Warrior-Poet. Other poetic titles included Poet, God-Poet, and Child of Verse and Metaphor. His sigil was the sword, which led to titles such as Blade and Sword of the Triune. The harp was another symbol associated with him because he expressed himself through song and music, earning the title Lyre. Titles reflecting his dualistic nature included Magic Hermaphrodite, Martial Axiom, and Child of Truth and Falsehood.",
   "embedding": null
 },
 {
-  "id": "uesp-house-indoril-001",
+  "id": "vivec_reverence_005",
   "source": "UESP",
-  "title": "House Indoril — Temple Hegemony and Political Dominance of Morrowind",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Indoril, also known as Clan Indoril or the Blue Party of Indoril, is one of the five Great Houses of the Dunmer. It governs the Indoril District in the heartland of Morrowind from its ancestral capital of Mournhold, which served as the capital of Morrowind until the Fourth Era.\n\nThe Indoril District includes east central lands south and east of the Inner Sea, encompassing large portions of eastern Stonefalls and Deshaan, fertile river valleys, parts of the Telvanni Peninsula, and stretches of the eastern coastline along the Padomaic Ocean. The house also controls several islands, including Gorne. Notable settlements historically associated with Indoril include Davon Watch near Bal Foyen. Although House Indoril has never claimed territory on Vvardenfell, ancestral tombs of Indoril families remain there.\n\nHouse Indoril has long been the most orthodox and conservative supporter of the Tribunal Temple. Claiming kinship with the Tribunal and tracing its heritage to Indoril Nerevar, the Hortator of the First Council, the house dominated Temple authority for thousands of years. Through its control of the Tribunal priesthood, House Indoril exercised political and religious power across Morrowind, effectively guiding provincial governance for approximately three thousand years.\n\nDuring the First and Second Eras, House Indoril held undisputed hegemony over Morrowind. Their dominance was closely tied to the Temple, and through it their influence extended beyond their geographic borders. This long period of supremacy ended with the signing of Tiber Septim Armistice, which curtailed Indoril uninterrupted control.\n\nAs of the Fourth Era, House Indoril is considered effectively unified with the New Temple, continuing its historical role as the religious and cultural center of Dunmer society."
-,
+  "title": "Reverence and Controversial Titles of Vivec",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Many honorific titles were given to Vivec by his followers including Lord, Our Lord, Master of Morrowind, Lord of the Middle Air, Champion, Guardian God-King, Mastery, and Living God. Within the Tribunal he was known as the Son, while Sotha Sil was the Father and Almalexia was the Mother. One unusual title, Mother-Father of Monsters, refers to both his dual gender nature and the monstrous offspring produced from his union with Molag Bal. Because Vivec was originally mortal before becoming divine, he was also sometimes called the Man-God. Outsiders and critics used less flattering names for him such as Circle Talker, Ansu-Gurleht, the God of Makes Us Woman, Seed-Bringer, the Devil, and the Liar.",
   "embedding": null
 },
 {
-  "id": "uesp-house-dres-001",
+  "id": "vivec_red_mountain_overview_006",
   "source": "UESP",
-  "title": "House Dres — Agrarian Power and Slaveholding Great House",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Dres, also known as Clan Dres, is one of the Great Houses of Morrowind and maintains holdings exclusively on the mainland. It governs the Dres District of southeastern Morrowind from its ancestral capital of Tear, located near the border of Black Marsh. The district includes parts of the fertile Deshaan plains, southern areas of the Telvanni Peninsula, and borders the Indoril and Hlaalu Districts as well as the marshlands of Shadowfen and Thornmarsh.\n\nDuring the mid Second Era, House Dres controlled the cities of Ebonheart and Kragenmoor in central Morrowind. At least once, it gained a limited foothold in Telvanni territory. House Dres has no recorded settlements on Vvardenfell, though ancient Dres families once lived there before relocating to the mainland, and ancestral tombs remain on the island.\n\nHouse Dres was formally established as a Great House before the middle of the First Era by Grandmaster Thalthil Dres following a slave raid over Thorn. The house developed into a wealthy agrarian society centered on large scale saltrice plantations across the plains and marshlands surrounding Tear.\n\nHouse Dres became infamous for its extensive slave trade. It supplied large numbers of slaves, primarily Argonians and Khajiit, to other Great Houses, maintaining vast slave pens in Tear and across plantation lands. In this respect, it rivaled Houses Indoril and Telvanni in slave holdings.\n\nCulturally, House Dres maintains a strong tradition of Daedra worship and ancestor reverence. Unlike some other Great Houses, Dres places emphasis on unity between the houses and the overall improvement of Dunmeri society. Despite its reputation for slavery, it is also known for valuing inter house diplomacy and cooperation."
-,
+  "title": "The War of the First Council and Red Mountain",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "The fall of the First Council and the Battle of Red Mountain are remembered through several conflicting historical accounts. Each version describes the events differently and portrays Vivec and the Tribunal in varying ways. These narratives attempt to explain the discovery of the Heart of Lorkhan, the disappearance of the Dwemer, and the death of Indoril Nerevar.",
   "embedding": null
 },
 {
-  "id": "uesp-house-sadras-001",
+  "id": "vivec_red_mountain_alandro_007",
   "source": "UESP",
-  "title": "House Sadras — Fourth Era Great House Replacement of Hlaalu",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Sadras is one of the five Great Houses of Morrowind in the Fourth Era. Following the Oblivion Crisis in 3E 433 and the eruption of Red Mountain in 4E 5, major political changes occurred in Morrowind. Anti Imperial sentiment grew after the Empire withdrawal from the province, and House Hlaalu was stripped of its status as a Great House due to its close association with Imperial rule.\n\nHouse Sadras was selected to replace House Hlaalu as the fifth member of the Grand Council of Morrowind. Little is known about House Sadras prior to this elevation. Its earlier territorial holdings, political influence, and role in previous eras remain largely undocumented. Despite this obscurity, House Sadras emerged in the Fourth Era as a recognized Great House within the restored Dunmer political structure."
-,
+  "title": "Alandro Sul Account of Red Mountain",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "According to Alandro Sul, a shield-companion of Nerevar who later lived among the Ashlanders, Voryn Dagoth informed Nerevar and the Tribunal that the Dwemer High Engineer Kagrenac had discovered the Heart of Lorkhan. Kagrenac was using specialized tools to harness its power in order to create a new god called the Numidium. Vivec and the Tribunal considered this sacrilege and urged war against the Dwemer.",
   "embedding": null
 },
 {
-  "id": "uesp-morrowind-fourth-era-politics-001",
+  "id": "vivec_red_mountain_nerevar_death_009",
   "source": "UESP",
-  "title": "Morrowind — Fourth Era Political Climate After Red Year and Argonian Invasion",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "Following the eruption of Red Mountain in 4E 5, which devastated Vvardenfell, Morrowind entered a severe political and social crisis. In the aftermath, Argonians from Black Marsh invaded Morrowind. The disasters and invasion reshaped Great House power and forced major changes in governance.\n\nHouse Hlaalu, due to its close association with the Imperial administration, became a scapegoat for Dunmer suffering. As a result, House Hlaalu was stripped of Great House status and removed from the Grand Council. The previously unknown House Sadras was selected to fill the vacant fifth seat on the Council.\n\nHouse Telvanni suffered massive losses. Many Telvanni settlements on Vvardenfell were destroyed by the Red Year, and the Argonian invasion nearly finished the house. One report claims the last mainland settlement fell to the Argonians. Survivors reportedly escaped aboard a ship called The Pride of Tel Vos, later found wrecked in Skyrim. A child described as the last of the Telvanni family line was raised in Black Marsh under the Argonian name Brand Shei. Despite these setbacks, Telvanni survivors endured, including those associated with Master Neloth, who helped reestablish a presence on Solstheim. Telvanni appears to have recovered enough to retain its seat on the Dunmer council.\n\nHouse Indoril had been declining since the end of the Second Era. The fall of the Tribunal Temple near the end of the Third Era, combined with the political actions of King Helseth and his Dres allies, weakened Indoril severely. Their capital of Mournhold was later sacked by invading Argonians. House Indoril still exists and holds a seat on the Council, but its political identity became effectively merged with the New Temple. Those who become priests are regarded as having joined Indoril, and Indoril authority is now largely expressed through the New Temple priesthood.\n\nHouse Dres status in the Fourth Era is less clearly defined, but as the southernmost Great House and historically central to the slave trade, it likely suffered heavily during the Argonian invasion. Despite this, House Dres retained its seat on the Grand Council, indicating it survived with meaningful power intact.\n\nHouse Redoran rose to become the dominant political and military power in Morrowind due to its leadership during the Oblivion Crisis, the Red Year, and the Argonian invasion. Redoran assumed leadership of the Grand Council and moved the capital to Blacklight. The Council now meets in Blacklight within the Rootspire, reflecting Redoran ascendancy and the diminished role of Mournhold after its sack.",
+  "title": "Ashlander Claim of Nerevar Murder",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "After the Dwemer vanished, Voryn Dagoth warned that Kagrenac Tools were dangerous and should be destroyed. Nerevar instead wished to consult the Tribunal before deciding. The Tribunal urged Nerevar to use the tools to claim power for the Chimer and possibly rule the world. According to the Ashlander version of events, the Tribunal grew greedy for the power of the Heart and murdered Nerevar through poisoned rituals carried out by Almalexia, Sotha Sil, and Vivec. Some stories also claim Vivec personally killed Nerevar using his spear Muatra.",
   "embedding": null
 },
 {
-  "id": "uesp-house-dagoth-001",
+  "id": "vivec_red_mountain_nord_account_010",
   "source": "UESP",
-  "title": "House Dagoth — The Sixth House and Rise of Dagoth Ur",
-  "url": "https://en.uesp.net/wiki/Lore:Great_Houses",
-  "text": "House Dagoth, also known as Clan Dagoth, the Sixth House, Shadow House, Sleeping House, Lost House, Traitor House, House of Lord Dagoth, and the Tribe Unmourned, was the defunct sixth Great House of the Chimer. It was led by Voryn Dagoth, who later became known as Dagoth Ur. The house ancient homeland was located in what later became Vvardenfell, and its capital was Kogoruhn, the only Great House capital situated in that region.\n\nDuring the War of the First Council in the First Era, House Dagoth was accused of betraying the other Great Houses and allying with the Dwemer. Some conflicting sources claim they instead fought against the Dwemer. Regardless of the truth, House Dagoth was branded a traitor house. After the Battle of Red Mountain, the house was destroyed. Records of its existence were erased, and its surviving members were either killed or absorbed into other Great Houses.\n\nUnknown to most, Voryn Dagoth survived beneath Red Mountain. Over centuries he slowly rebuilt his strength and influence from within the mountain. Eventually he forged a connection to the Heart of Lorkhan and drew divine power from it, much like the Tribunal had done. Dagoth Ur sought to overthrow the Tribunal and conquer Morrowind.\n\nAs part of his plans, Dagoth Ur attempted to recreate the Dwemer god construct Numidium in the form of Akulakhan. In 3E 427, the Nerevarine destroyed the Heart of Lorkhan, severing Dagoth Ur power and killing him. With his death, the Sixth House threat was ended and House Dagoth remained extinct.",
+  "title": "Nordic Songs of King Wulfharth",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Nordic legends tell a different story of the Battle of Red Mountain. In these tales Voryn Dagoth approached the Nords and promised to reveal the location of the Heart of Shor. The Nords summoned the spirit of their god Shor and gathered an army led by Wulfharth. However when they arrived at Red Mountain the Heart was not there and they were ambushed by Dwemer and Chimer forces. In the battle Wulfharth killed King Dumac but Vivec blasted Wulfharth into Hell and the Nordic army was defeated.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_secret_song_011",
+  "source": "UESP",
+  "title": "Secret Retelling of the Nordic Song",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "A hidden version of the Nordic story claims that Voryn Dagoth did not deceive the Nords and that the Heart of Lorkhan truly existed in Resdayn. In this account Dagoth sought vengeance against the Tribunal for betraying Nerevar. The war resulted in the destruction of the Dwemer race, the defeat of Lorkhan by Nerevar, and eventually the death of Nerevar from the wounds he suffered during the battle.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_vivec_account_012",
+  "source": "UESP",
+  "title": "Vivec Own Account of Red Mountain",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Vivec later presented his own version of the battle which he claimed to be the true account. In this version the Tribunal advised Nerevar that the Dwemer might not be destroyed but instead displaced to another realm. They recommended preserving Kagrenac Tools for study to protect the Chimer in the future. Nerevar agreed only after the Tribunal swore sacred oaths to Azura that they would never use the tools to make themselves gods.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_tools_conflict_013",
+  "source": "UESP",
+  "title": "Conflict with Voryn Dagoth Over Kagrenac Tools",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "When Nerevar and the Tribunal attempted to retrieve Kagrenac Tools from Voryn Dagoth, he refused to surrender them and insisted that only he could be trusted to guard them. The Tribunal and Nerevar took the tools by force and entrusted them to Sotha Sil for safekeeping and study. Vivec rejected the Ashlander claim that the Tribunal murdered Nerevar and dismissed Alandro Sul account as false.",
+  "embedding": null
+},
+{
+  "id": "vivec_nerevarine_crisis_014",
+  "source": "UESP",
+  "title": "The Crisis of the Sixth House",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "In 3E 427 the Blight across Vvardenfell had become extremely deadly, causing widespread soul sickness among the Dunmer. Dagoth Ur used his divine influence to invade the dreams of the people of Morrowind and persuaded many Dunmer who resented the Tribunal and the Imperial presence to join the Sixth House. The cult grew powerful and aggressive, murdering Imperial citizens, Hlaalu Imperial sympathizers, and even Temple Ordinators.",
+  "embedding": null
+},
+{
+  "id": "vivec_nerevarine_arrival_015",
+  "source": "UESP",
+  "title": "Arrival of the Nerevarine",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "During this crisis a mysterious outsider arrived in Vvardenfell at the order of Emperor Uriel Septim VII. With the assistance of the Blades spymaster Caius Cosades the individual began to fulfill the steps described in the ancient Nerevarine Prophecies.",
+  "embedding": null
+},
+{
+  "id": "vivec_nerevarine_enemy_016",
+  "source": "UESP",
+  "title": "Temple Opposition to the Nerevarine",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "At first Vivec and the Tribunal Temple declared the outsider an enemy, causing the Temple Ordinators to treat them with hostility. The prophecy threatened the religious authority of the Tribunal and the faith of the Dunmer people which Vivec needed in order to maintain the Ghostfence that contained Dagoth Ur.",
+  "embedding": null
+},
+{
+  "id": "vivec_nerevarine_recognition_017",
+  "source": "UESP",
+  "title": "Recognition of the Nerevarine",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "The situation changed when the Great Houses of Vvardenfell named the outsider Hortator and the Ashlander tribes declared them to be the Nerevarine. Temple Archcanon Tholer Saryoni announced that despite earlier persecution the Temple was desperate and that the Nerevarine Prophecy might be their final hope against Dagoth Ur.",
+  "embedding": null
+},
+{
+  "id": "vivec_nerevarine_meeting_018",
+  "source": "UESP",
+  "title": "Meeting Between Vivec and the Nerevarine",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Vivec eventually met with the Nerevarine in person and declared an end to the persecution of the Dissident Priests. He lifted the curse on the Nerevarine and publicly proclaimed them the prophesied savior of Morrowind and the last hope for defeating Dagoth Ur and the Sixth House. In response the Nerevarine swore an oath to destroy Dagoth Ur.",
+  "embedding": null
+},
+{
+  "id": "vivec_wraithguard_training_019",
+  "source": "UESP",
+  "title": "Vivec Entrusts Wraithguard",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Vivec entrusted the Nerevarine with Wraithguard, the final Tool of Kagrenac still held by the Tribunal. He took the Nerevarine outside of time and instructed them in how to safely use the artifact. Vivec also acted as a guide and counselor as the Nerevarine prepared for the final campaign against Dagoth Ur at Red Mountain.",
+  "embedding": null
+},
+{
+  "id": "vivec_dagoth_ur_defeat_020",
+  "source": "UESP",
+  "title": "Defeat of Dagoth Ur and Destruction of Akulakhan",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Following Vivec guidance the Nerevarine reached Red Mountain and severed the enchantments binding the Heart of Lorkhan. This destroyed the giant golem Akulakhan which the Sixth House was constructing. The Nerevarine then defeated Dagoth Ur in combat and with the Heart no longer empowering him the sorcerer was destroyed along with the Heartwights.",
+  "embedding": null
+},
+{
+  "id": "vivec_loss_of_divinity_021",
+  "source": "UESP",
+  "title": "The Tribunal Loses Their Divine Power",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "With the Heart of Lorkhan freed the Tribunal lost their connection to its divine power. Vivec later explained to the Nerevarine that although their godhood was mostly gone the faith of the Dunmer people still granted them a small measure of power. Vivec predicted that the Tribunal would eventually fade into history as saints and that the Dunmer would return to worshipping the ancient Daedric patrons Azura, Boethiah, and Mephala.",
+  "embedding": null
+},
+{
+  "id": "vivec_mournhold_events_022",
+  "source": "UESP",
+  "title": "Events in Mournhold and the Death of Sotha Sil",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "After these events the Nerevarine traveled to Mournhold where Almalexia acknowledged them as the reincarnation of Nerevar. She later sent the Nerevarine to kill Sotha Sil claiming that he had become a mad god responsible for disasters in the city. When the Nerevarine reached the Clockwork City they discovered Sotha Sil had already been murdered.",
+  "embedding": null
+},
+{
+  "id": "vivec_almalexia_fall_023",
+  "source": "UESP",
+  "title": "Almalexia Madness and Death",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Almalexia had become unstable after losing the power of the Heart of Lorkhan. In desperation she killed Sotha Sil and planned to kill Vivec so that she alone would be worshipped as the sole god of Morrowind. The Nerevarine defeated and killed Almalexia. Shortly afterward Azura appeared and suggested that Vivec time as a living god was nearing its end.",
+  "embedding": null
+},
+{
+  "id": "vivec_final_tribunal_024",
+  "source": "UESP",
+  "title": "Vivec Final Days of the Tribunal",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "In a final meeting the Nerevarine informed Vivec of the deaths of Sotha Sil and Almalexia. Vivec mourned the loss of his fellow Tribunes but accepted it as inevitable. He later traveled to the Clockwork City to retrieve their bodies and buried them according to traditional Velothi rites.",
   "embedding": null
 }
 ]

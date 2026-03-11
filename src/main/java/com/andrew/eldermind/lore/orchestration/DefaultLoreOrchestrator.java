@@ -136,24 +136,16 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
 
         /**
          * RetrievalDecision captures explainability metadata for this request.
-         * It allows us to understand:
-         *  - whether retrieval was attempted,
-         *  - whether it was used,
-         *  - why we fell back when it was not used.
-         *
-         * This is critical for observability, debugging, and AI safety.
          */
         RetrievalDecision decision = new RetrievalDecision();
 
         /**
          * Step 0: Extract the most recent user-authored message.
-         * We treat this as the canonical query for lore retrieval.
          */
         String latestUserQuery = extractLatestUserMessage(request);
 
         /**
-         * Step 0a: If the query is empty or meaningless,
-         * skip retrieval entirely and fall back to standard chat behavior.
+         * Step 0a: If the query is empty, skip retrieval entirely.
          */
         if (latestUserQuery == null || latestUserQuery.trim().isEmpty()) {
             decision.setRetrievalAttempted(false);
@@ -167,12 +159,53 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         }
 
         /**
-         * Step 1: Attempt lore retrieval.
-         * Any exception here should fail safely and fall back to chat-only mode.
-         * From this point onward, retrieval has been attempted.
-        */
+         * Step 0b: Extract keywords and compute must-hit terms BEFORE retrieval.
+         * If the query is too generic, skip retrieval entirely.
+         */
+        var keywords = queryAnalyzer.extractKeywords(latestUserQuery);
 
+        var genericTerms = java.util.Set.of(
+                // Question words
+                "what", "which", "who", "where", "when", "why", "how",
+
+                // Weak generic nouns
+                "house", "war", "event", "history", "story", "thing", "stuff", "great",
+
+                // Weak verbs
+                "happened", "happen", "ended", "lost",
+
+                // Filler / emphasis words
+                "too", "very", "really", "close",
+
+                // Misc common noise
+                "about", "tell", "explain"
+        );
+
+        var mustHit = keywords.stream()
+                .map(String::toLowerCase)
+                .filter(token -> token.length() >= 3)
+                .filter(token -> !genericTerms.contains(token))
+                .collect(java.util.stream.Collectors.toSet());
+
+        System.out.println("[Gate] query=\"" + latestUserQuery + "\" mustHit=" + mustHit);
+
+        if (mustHit.isEmpty()) {
+            decision.setRetrievalAttempted(false);   // retrieval never ran
+            decision.setRetrievalUsed(false);
+            decision.setMatchedDocs(0);
+            decision.setTopScore(0.0);
+            decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
+
+            logDecision(decision, latestUserQuery);
+            return chatService.getChatResponse(request);
+        }
+
+        /**
+         * Step 1: Attempt lore retrieval.
+         * From this point onward, retrieval has actually been attempted.
+         */
         decision.setRetrievalAttempted(true);
+
         List<LoreMatch> matches;
 
         try {
@@ -187,15 +220,11 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             return chatService.getChatResponse(request);
         }
 
-        // Populate decision metadata manually (Phase 2 simplified model)
         decision.setMatchedDocs(matches.size());
-        decision.setTopScore(
-                matches.isEmpty() ? 0.0 : matches.get(0).getScore()
-        );
+        decision.setTopScore(matches.isEmpty() ? 0.0 : matches.get(0).getScore());
 
         /**
-         * Step 2: If no documents matched at all,
-         * do not inject unrelated or low-quality evidence.
+         * Step 2: If no documents matched at all, fall back.
          */
         if (matches == null || matches.isEmpty()) {
             decision.setRetrievalUsed(false);
@@ -208,49 +237,15 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         }
 
         /**
-         * Step 2.5: Hard-evidence gate (anti-false-positive filter)
-         *
-         * Keyword scoring can be fooled by generic tokens like "house" or "happened",
-         * which appear across many lore documents. That can produce a non-zero score
-         * even when none of the retrieved snippets actually mention the user's subject.
-         *
-         * To prevent injecting irrelevant lore, we require that at least one
-         * retrieved snippet contains at least one "must-hit" term from the query.
+         * Step 2.5: Hard-evidence gate.
+         * At least one retrieved doc must contain at least one must-hit term.
          */
-        var keywords = queryAnalyzer.extractKeywords(latestUserQuery);
+        boolean hasHardEvidence = matches.stream().anyMatch(m -> {
+            String t = safe(m.getDocument().getTitle()).toLowerCase();
+            String b = safe(m.getDocument().getText()).toLowerCase();
+            return mustHit.stream().anyMatch(term -> t.contains(term) || b.contains(term));
+        });
 
-        // Tokens that are too generic to count as proof of relevance.
-        // (These often show up in questions and can inflate keyword scores.)
-        var genericTerms = java.util.Set.of(
-                "house", "war", "event", "history", "story", "thing", "stuff",
-                "happened", "happen", "ended", "first"
-        );
-
-        // Must-hit terms = extracted keywords minus generic/noise terms.
-        // For "What happened to House Hlaalu?" this becomes {"hlaalu"}.
-        var mustHit = keywords.stream()
-                .filter(token -> !genericTerms.contains(token))
-                .collect(java.util.stream.Collectors.toSet());
-
-        
-        // If query is too generic, do NOT retrieve (prevents Warp-in-the-West or other irrelevant queries spam)
-        if (mustHit.isEmpty()) {
-            decision.setRetrievalUsed(false);
-            decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE); // or QUERY_TOO_GENERIC if you add it
-            logDecision(decision, latestUserQuery);
-            return chatService.getChatResponse(request);
-        }
-
-        // If we have must-hit terms, require that at least one retrieved doc
-        // actually contains one of them in its title or body.
-        boolean hasHardEvidence =
-                mustHit.isEmpty() || matches.stream().anyMatch(m -> {
-                    String t = safe(m.getDocument().getTitle()).toLowerCase();
-                    String b = safe(m.getDocument().getText()).toLowerCase();
-                    return mustHit.stream().anyMatch(term -> t.contains(term) || b.contains(term));
-                });
-
-        // If no hard evidence of relevance, skip retrieval to avoid poisoning the response.
         if (!hasHardEvidence) {
             decision.setRetrievalUsed(false);
             decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
