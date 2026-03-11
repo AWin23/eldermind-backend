@@ -30,6 +30,23 @@ import java.util.stream.Collectors;
 @Service
 public class HybridRetriever implements LoreRetriever {
 
+    // Optional: if you want to keep more debug info per doc during merge, you can use this class.
+    private static class HybridScoreRow {
+
+    final LoreDocument doc; // for reference, not strictly needed for scoring
+
+    // Original scores from retrievers (before normalization)
+    double keywordRaw;
+    double keywordNorm;
+    double embeddingScore;
+    double finalScore;
+
+    // Constructor for convenience
+    HybridScoreRow(LoreDocument doc) {
+        this.doc = doc;
+    }
+}
+    // Core retrievers we are hybridizing
     private final KeywordRetriever keywordRetriever;
     private final EmbeddingRetriever embeddingRetriever;
 
@@ -40,6 +57,7 @@ public class HybridRetriever implements LoreRetriever {
      */
     private static final double W_EMBEDDING = 0.6;
     private static final double W_KEYWORD = 0.4;
+
 
     /**
      * Keyword normalization hyperparameter.
@@ -58,19 +76,67 @@ public class HybridRetriever implements LoreRetriever {
         this.embeddingRetriever = embeddingRetriever;
     }
 
+
     /**
-     * Retrieve top K lore snippets using hybrid scoring.
+     * Retrieve top K lore snippets using hybrid retrieval and ranking.
      *
-     * High-level steps:
-     *   1) Pull candidates from KeywordRetriever and EmbeddingRetriever
-     *   2) Merge results by docId so each doc has (keywordScore, embeddingScore)
-     *   3) Normalize keywordScore into [0,1]
-     *   4) Compute finalScore using weighted sum
-     *   5) Sort by finalScore descending, return top K
+     * High-level pipeline:
      *
-     * Note:
-     *   Your "hard-evidence gate" belongs AFTER ranking (in orchestrator),
-     *   not inside this retriever, so HybridRetriever stays pure: retrieval+ranking only.
+     *   1) Candidate Retrieval
+     *      - Run both KeywordRetriever and EmbeddingRetriever.
+     *      - Each retriever returns up to fetchK candidates (k * 3) to give the
+     *        hybrid stage enough overlap for meaningful fusion.
+     *
+     *   2) Candidate Merge
+     *      - Merge results by document ID so each document has a combined record
+     *        containing:
+     *            keywordScore (lexical relevance)
+     *            embeddingScore (semantic similarity)
+     *
+     *   3) Score Normalization
+     *      - Normalize keywordScore into the range [0,1] so it is comparable to
+     *        cosine similarity embedding scores.
+     *
+     *   4) Hybrid Score Fusion
+     *      - Compute the final hybrid ranking score using a weighted sum:
+     *
+     *          finalScore = (W_EMBEDDING * embeddingScore)
+     *                     + (W_KEYWORD   * keywordNorm)
+     *
+     *      - This allows semantic similarity to dominate while still benefiting
+     *        from precise keyword matches.
+     *
+     *   5) Ranking
+     *      - Build internal HybridScoreRow objects containing:
+     *            raw keyword score
+     *            normalized keyword score
+     *            embedding similarity
+     *            final hybrid score
+     *
+     *      - Sort documents by finalScore descending.
+     *      - Select the top K results.
+     *
+     *   6) Observability / Debug Logging
+     *      - Log a detailed breakdown of the top ranked documents including:
+     *            document id
+     *            title
+     *            raw keyword score
+     *            normalized keyword score
+     *            embedding similarity
+     *            final hybrid score
+     *
+     *      - This makes it easy to inspect why a document ranked highly when
+     *        tuning retrieval weights or debugging ranking behavior.
+     *
+     *   7) Output Conversion
+     *      - Convert HybridScoreRow objects back into LoreMatch instances so the
+     *        rest of the pipeline remains unchanged.
+     *
+     * Design Note:
+     *   HybridRetriever intentionally performs only retrieval and ranking.
+     *   Safety mechanisms such as the "hard-evidence gate" and threshold checks
+     *   belong in DefaultLoreOrchestrator so this component stays pure and
+     *   reusable.
      */
     @Override
     public List<LoreMatch> retrieveTopK(String query, int k) {
@@ -85,7 +151,7 @@ public class HybridRetriever implements LoreRetriever {
         List<LoreMatch> embeddingMatches = embeddingRetriever.retrieveTopK(query, fetchK);
 
         // 2) Merge by docId
-        // docId -> Partial scores (keyword + embedding)
+        // docId -> partial scores (keyword + embedding)
         Map<String, PartialScores> mergedById = new HashMap<>();
 
         // Add keyword scores
@@ -110,32 +176,48 @@ public class HybridRetriever implements LoreRetriever {
                     .embeddingScore = m.getScore();
         }
 
-        // 3) Compute final hybrid score per doc
-        // finalScore = 0.6 * embeddingScore + 0.4 * keywordNorm
-        List<LoreMatch> hybridRanked = mergedById.values().stream()
+        // 3) Build detailed score rows so we can log all score components
+        List<HybridScoreRow> rankedRows = mergedById.values().stream()
                 .map(p -> {
-                    double keywordNorm = normalizeKeyword(p.keywordScore);
-                    double finalScore =
-                            (W_EMBEDDING * p.embeddingScore) +
-                            (W_KEYWORD * keywordNorm);
-
-                    // Return LoreMatch with finalScore so downstream stays identical
-                    return new LoreMatch(p.doc, finalScore);
+                    HybridScoreRow row = new HybridScoreRow(p.doc);
+                    row.keywordRaw = p.keywordScore;
+                    row.keywordNorm = normalizeKeyword(p.keywordScore);
+                    row.embeddingScore = p.embeddingScore;
+                    row.finalScore =
+                            (W_EMBEDDING * row.embeddingScore) +
+                            (W_KEYWORD * row.keywordNorm);
+                    return row;
                 })
-                .sorted(Comparator.comparingDouble(LoreMatch::getScore).reversed())
+                .sorted(Comparator.comparingDouble((HybridScoreRow row) -> row.finalScore).reversed())
                 .limit(k)
                 .collect(Collectors.toList());
 
-        // Optional: lightweight debug logging (useful when tuning)
-        // You can replace System.out with your logger.
-        if (!hybridRanked.isEmpty()) {
+        // 4) Rich hybrid debug logging
+        if (!rankedRows.isEmpty()) {
             System.out.println(
                     "[HybridRetriever] query=\"" + query + "\" " +
                     "candidates=" + mergedById.size() + " " +
-                    "topFinal=" + round(hybridRanked.get(0).getScore()) + " " +
+                    "topFinal=" + round(rankedRows.get(0).finalScore) + " " +
                     "topKwRaw=" + round(topScore(keywordMatches)) + " " +
                     "topEmb=" + round(topScore(embeddingMatches))
             );
+
+            for (int i = 0; i < rankedRows.size(); i++) {
+                HybridScoreRow row = rankedRows.get(i);
+
+                System.out.println(
+                        "  rank=" + (i + 1) +
+                        " id=" + safeId(row.doc) +
+                        " | title=" + safe(row.doc.getTitle())
+                );
+
+                System.out.println(
+                        "    kwRaw=" + round(row.keywordRaw) +
+                        " kwNorm=" + round(row.keywordNorm) +
+                        " emb=" + round(row.embeddingScore) +
+                        " final=" + round(row.finalScore)
+                );
+            }
         } else {
             System.out.println(
                     "[HybridRetriever] query=\"" + query + "\" no results " +
@@ -143,7 +225,10 @@ public class HybridRetriever implements LoreRetriever {
             );
         }
 
-        return hybridRanked;
+        // 5) Convert back to LoreMatch so downstream stays unchanged
+        return rankedRows.stream()
+                .map(row -> new LoreMatch(row.doc, row.finalScore))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -161,6 +246,13 @@ public class HybridRetriever implements LoreRetriever {
         if (keywordScore <= 0.0) return 0.0;
         return 1.0 - Math.exp(-keywordScore / KEYWORD_NORM_DIV);
     }
+
+    
+    // Defensive string handling for debug logs (avoid nulls).
+    private String safe(String value) {
+        return value == null ? "" : value;
+    }
+    
 
     /**
      * Defensive doc id extraction.

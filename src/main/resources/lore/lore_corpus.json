@@ -469,6 +469,94 @@
   "url": "https://en.uesp.net/wiki/Lore:Vivec",
   "text": "In a final meeting the Nerevarine informed Vivec of the deaths of Sotha Sil and Almalexia. Vivec mourned the loss of his fellow Tribunes but accepted it as inevitable. He later traveled to the Clockwork City to retrieve their bodies and buried them according to traditional Velothi rites.",
   "embedding": null
+},
+{
+  "id": "vivec_red_mountain_alandro_intro",
+  "source": "UESP",
+  "title": "Alandro Sul Account of Red Mountain",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Alandro Sul, a shield companion of Indoril Nerevar, later lived among the Ashlanders after the Battle of Red Mountain and recounted his version of the events. According to his account Voryn Dagoth approached Nerevar and the Tribunal with evidence that the Dwemer High Engineer Kagrenac had discovered the Heart of Lorkhan. Kagrenac was using specialized tools to harness the power of the Heart in an attempt to create a new god known as Numidium. Vivec and the rest of the Tribunal urged war against the Dwemer for this act of sacrilege.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_alandro_heart_chamber",
+  "source": "UESP",
+  "title": "Alandro Sul Account - The Heart Chamber Battle",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "While the Tribunal battled the Dwemer armies in the fields, Nerevar and Voryn Dagoth infiltrated the Heart Chamber beneath Red Mountain. There they confronted and slew both King Dumac and Kagrenac, though Dumac inflicted grievous wounds upon Nerevar during the battle. Nerevar then summoned the Daedric Prince Azura who showed Nerevar and Voryn Dagoth how to use Kagrenac tools to separate the Dwemer from the power of the Heart of Lorkhan, causing the Dwemer race to vanish and turn to dust.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_alandro_tools_conflict",
+  "source": "UESP",
+  "title": "Alandro Sul Account - Debate Over Kagrenac Tools",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "After the Dwemer disappearance Voryn Dagoth advised that Kagrenac tools should be destroyed because of the immense danger they represented. Nerevar instead wished to consult the Tribunal before making such a decision. When Nerevar returned to them the Tribunal encouraged him to use the tools and harness the power of the Heart to claim Resdayn and perhaps rule the entire world for the Chimer. Nerevar was disturbed by this counsel and decided he wished to summon Azura again before any action was taken.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_alandro_nerevar_murder",
+  "source": "UESP",
+  "title": "Alandro Sul Account - Murder of Nerevar",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "According to the Ashlander tradition the Tribunal had become greedy and desired the power of the Heart of Lorkhan for themselves. They pretended to perform the ritual to summon Azura but instead murdered Indoril Nerevar. Almalexia used poisoned candles, Sotha Sil used poisoned robes, and Vivec used poisoned invocations to complete the betrayal. Other versions of this story claim Vivec personally killed Nerevar by plunging his spear Muatra through him.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_vivec_testimony",
+  "source": "UESP",
+  "title": "Vivec Account of the Battle of Red Mountain",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Vivec provides his own account of the Battle of Red Mountain which he claims to be the true version of events. Much of his telling resembles the Ashlander account recorded by Alandro Sul until the moment when Nerevar consults the Tribunal about Kagrenac tools. According to Vivec the Tribunal believed the Dwemer might not have been destroyed but displaced to another realm. They advised preserving the tools and studying them so the Chimer could protect themselves in the future. Nerevar agreed only after requiring the Tribunal to swear sacred oaths to Azura that they would never use the tools to elevate themselves beyond the gods. The Tribunal accepted these terms and swore the oath.",
+  "embedding": null
+},
+{
+  "id": "vivec_red_mountain_vivec_dagoth_conflict",
+  "source": "UESP",
+  "title": "Vivec Account - Conflict with Voryn Dagoth",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "When Nerevar and the Tribunal returned to retrieve Kagrenac tools they discovered that Voryn Dagoth had taken responsibility for guarding them. Dagoth refused to surrender the tools and insisted that only he could be trusted to safeguard them. The Tribunal and Nerevar ultimately seized the tools by force and entrusted them to Sotha Sil for study and safe keeping. Vivec later rejected the Ashlander claims that the Tribunal murdered Nerevar and dismissed the testimony of Alandro Sul.",
+  "embedding": null
+},
+{
+  "id": "vivec_sermons_red_mountain",
+  "source": "UESP",
+  "title": "Vivec Sermons Account of Red Mountain",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "In the Sermons Vivec presents a more mythic version of the Battle of Red Mountain. In this telling the Chimer and Dwemer once lived peacefully under the wise rule of Almsivi and their champion Nerevar. The Dwemer later rebelled and were aided by the Nords and Ysmir Wulfharth. Nerevar led the Chimer armies and wielded the Ethos Knife to kill King Dumac and witness the Heart of Lorkhan. Meanwhile the city of Mourning Hold was attacked by Dwemer machines before Almalexia and Sotha Sil repelled them. Nerevar continued deeper into Red Mountain seeking Dagoth Ur but went too far inside and the mountain erupted.",
+  "embedding": null
+},
+{
+  "id": "vivec_sermons_numidium_weapon",
+  "source": "UESP",
+  "title": "Vivec Sermons - Dwemer Walking Star Weapon",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "According to Vivec Sermons the Dwemer high priest Kagrenac unveiled the ultimate Dwemer weapon described as a walking star built in Vivec own image. The construct unleashed destructive power that reshaped the land and created the Inner Sea. The combined power of the Tribunal eventually destroyed the weapon and when it fell the Dwemer vanished from the world.",
+  "embedding": null
+},
+{
+  "id": "vivec_sermons_foul_murder_message",
+  "source": "UESP",
+  "title": "Hidden Message in the Thirty Sixth Sermon",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Despite denying the murder of Nerevar in other accounts Vivec Sermons contain hidden messages that suggest another truth. The Thirty Sixth Sermon describing the Battle of Red Mountain forms an acrostic message when the first letter of each paragraph is read together spelling the phrase Foul Murder.",
+  "embedding": null
+},
+{
+  "id": "vivec_sermons_hidden_confession",
+  "source": "UESP",
+  "title": "Hidden Confession in Vivec Sermons",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Another hidden message appears in Sermon Twenty Nine where a coded sequence of words reveals the statement He was not born a god. His destiny did not lead him to this crime. He chose this path of his own free will. He stole the godhood and murdered the Hortator. Vivec wrote this.",
+  "embedding": null
+},
+{
+  "id": "vivec_sermons_symbolic_implications",
+  "source": "UESP",
+  "title": "Symbolic Implications in Vivec Sermons",
+  "url": "https://en.uesp.net/wiki/Lore:Vivec",
+  "text": "Throughout the Sermons Vivec makes symbolic statements that some interpret as indirect admissions of Nerevar death. In one passage Vivec teaches Nerevar how to rule and declares that he will murder the ruling king repeatedly until the lesson is understood. In another story Nerevar accompanies Vivec to confront the monster child Gulga Mor Jil who submits without resistance because Nerevar represents consolation. Vivec later describes this Sermon as consolation for those destined to die.",
+  "embedding": null
 }
 ]
 

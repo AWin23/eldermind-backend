@@ -224,7 +224,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         decision.setTopScore(matches.isEmpty() ? 0.0 : matches.get(0).getScore());
 
         /**
-         * Step 2: If no documents matched at all, fall back.
+         * Step 2: If no documents matched at all, fall back to default Chat Service.
          */
         if (matches == null || matches.isEmpty()) {
             decision.setRetrievalUsed(false);
