@@ -1,0 +1,10 @@
+[
+  {
+    "query": "What happened at Red Mountain?",
+    "expectedDocs": ["uesp-red-mountain-001"]
+  },
+  {
+    "query": "What is CHIM?",
+    "expectedDocs": ["chim_overview_001"]
+  }
+]
