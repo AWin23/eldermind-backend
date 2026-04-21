@@ -5,7 +5,7 @@ import com.andrew.eldermind.dto.ChatResponse;
 import com.andrew.eldermind.dto.RetrievalDecision;
 import com.andrew.eldermind.dto.FallbackReason;
 
-
+import com.andrew.eldermind.service.RetrievalConfidenceService;
 import com.andrew.eldermind.service.ChatService;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
@@ -47,6 +47,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
     private final ChatService chatService;
     private final QueryAnalyzer queryAnalyzer;
     private final HybridRetriever hybridRetriever;
+    private final RetrievalConfidenceService retrievalConfidenceService;
 
 
     /**
@@ -94,13 +95,15 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             LoreLLMGateway loreLLMGateway,
             ChatService chatService,
             QueryAnalyzer queryAnalyzer,
-            HybridRetriever hybridRetriever
+            HybridRetriever hybridRetriever,
+            RetrievalConfidenceService retrievalConfidenceService
     ) {
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
         this.chatService = chatService;
         this.queryAnalyzer = queryAnalyzer;
         this.hybridRetriever = hybridRetriever;
+        this.retrievalConfidenceService = retrievalConfidenceService;
     }
 
     /**
@@ -118,12 +121,14 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         }
 
         log.info(
-            "RetrievalDecision attempted={} used={} matchedDocs={} topScore={} threshold={} fallbackReason={} retrieverVersion={} query=\"{}\"",
+            "RetrievalDecision attempted={} used={} matchedDocs={} topScore={} threshold={} confidence={} groundingLabel={} fallbackReason={} retrieverVersion={} query=\"{}\"",
             decision.isRetrievalAttempted(),
             decision.isRetrievalUsed(),
             decision.getMatchedDocs(),
             decision.getTopScore(),
             decision.getThreshold(),
+            decision.getRetrievalConfidence(),
+            decision.getGroundingLabel(),
             decision.getFallbackReason(),
             decision.getRetrieverVersion(),
             safeQuery
@@ -138,6 +143,9 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
          * RetrievalDecision captures explainability metadata for this request.
          */
         RetrievalDecision decision = new RetrievalDecision();
+
+        // Set default threshold for this request 
+        decision.setThreshold(DEFAULT_THRESHOLD);
 
         /**
          * Step 0: Extract the most recent user-authored message.
@@ -154,8 +162,9 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setTopScore(0.0);
             decision.setFallbackReason(FallbackReason.NO_KEYWORDS);
 
-            logDecision(decision, latestUserQuery);
-            return chatService.getChatResponse(request);
+            setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
+            logDecision(decision, latestUserQuery); // Log the decision for observability
+            return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
         /**
@@ -189,6 +198,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
 
         System.out.println("[Gate] query=\"" + latestUserQuery + "\" mustHit=" + mustHit);
 
+        // If no must-hit terms remain, skip retrieval to avoid injecting irrelevant lore.
         if (mustHit.isEmpty()) {
             decision.setRetrievalAttempted(false);   // retrieval never ran
             decision.setRetrievalUsed(false);
@@ -196,8 +206,9 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setTopScore(0.0);
             decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
 
-            logDecision(decision, latestUserQuery);
-            return chatService.getChatResponse(request);
+            setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
+            logDecision(decision, latestUserQuery); // Log the decision for observability
+            return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
         /**
@@ -216,12 +227,10 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setTopScore(0.0);
             decision.setFallbackReason(FallbackReason.ERROR);
 
-            logDecision(decision, latestUserQuery);
-            return chatService.getChatResponse(request);
+            setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
+            logDecision(decision, latestUserQuery); // Log the decision for observability, including the error
+            return chatService.getChatResponse(request); // Fallback to chat-only response
         }
-
-        decision.setMatchedDocs(matches.size());
-        decision.setTopScore(matches.isEmpty() ? 0.0 : matches.get(0).getScore());
 
         /**
          * Step 2: If no documents matched at all, fall back to default Chat Service.
@@ -232,9 +241,13 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setTopScore(0.0);
             decision.setFallbackReason(FallbackReason.NO_MATCHES);
 
+            setUngroundedDecisionMetadata(decision);
             logDecision(decision, latestUserQuery);
             return chatService.getChatResponse(request);
         }
+
+        decision.setMatchedDocs(matches.size());
+        decision.setTopScore(matches.get(0).getScore());
 
         /**
          * Step 2.5: Hard-evidence gate.
@@ -249,9 +262,9 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         if (!hasHardEvidence) {
             decision.setRetrievalUsed(false);
             decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
-
-            logDecision(decision, latestUserQuery);
-            return chatService.getChatResponse(request);
+            setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
+            logDecision(decision, latestUserQuery); // Log the decision for observability
+            return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
         /**
@@ -271,6 +284,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setRetrievalUsed(false);
             decision.setFallbackReason(FallbackReason.BELOW_THRESHOLD);
 
+            setUngroundedDecisionMetadata(decision); 
             logDecision(decision, latestUserQuery);
             return chatService.getChatResponse(request);
         }
@@ -281,6 +295,15 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
          */
         decision.setRetrievalUsed(true);
         decision.setFallbackReason(null);
+
+        // Compute retrieval confidence and grounding label for observability and potential UI display
+        // This is a more nuanced signal than just "used vs not used" and can help us understand the quality of retrieved evidence
+        double confidence = retrievalConfidenceService.computeConfidence(decision);
+        String groundingLabel = retrievalConfidenceService.computeLabel(confidence);
+
+        // Attach confidence and grounding label to the decision for logging and potential UI display
+        decision.setRetrievalConfidence(confidence);
+        decision.setGroundingLabel(groundingLabel);
 
         /**
          * Convert LoreMatch objects into raw LoreDocuments
@@ -340,7 +363,13 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
 
     // Utility to safely handle null strings when checking for keywords in evidence.
     private String safe(String s) {
-    return (s == null) ? "" : s;
-}
+        return (s == null) ? "" : s;
+    }
+
+    // Utility to set default metadata for ungrounded decisions for consistent logging and UI display.
+    private void setUngroundedDecisionMetadata(RetrievalDecision decision) {
+        decision.setRetrievalConfidence(0.0);
+        decision.setGroundingLabel("Answer generated without external evidence");
+    }
 }
 

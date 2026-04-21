@@ -12,6 +12,11 @@ public class RetrievalDecision {
     private FallbackReason fallbackReason; // Why retrieval was skipped (nullable)
     private String retrieverVersion;       // e.g. "keyword-v1"
 
+
+    // Retrieval Confidence Forms:
+    private Double retrievalConfidence;
+    private String groundingLabel;
+
     // Constructors, getters, setters (or Lombok if you use it)
     public RetrievalDecision() {
         // Default constructor
@@ -82,5 +87,21 @@ public class RetrievalDecision {
 
     public void setRetrieverVersion(String retrieverVersion) {
         this.retrieverVersion = retrieverVersion;
+    }
+
+    public Double getRetrievalConfidence() {
+        return retrievalConfidence;
+    }
+
+    public void setRetrievalConfidence(Double retrievalConfidence) {
+        this.retrievalConfidence = retrievalConfidence;
+    }
+
+    public String getGroundingLabel() {
+        return groundingLabel;
+    }
+
+    public void setGroundingLabel(String groundingLabel) {
+        this.groundingLabel = groundingLabel;
     }
 }
