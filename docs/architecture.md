@@ -106,6 +106,3 @@ are preserved.
 The output from this component helps power the hard-evidence gate.
 
 ---
-
-### LLM Gateway
-...
