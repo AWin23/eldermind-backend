@@ -4,8 +4,9 @@ import com.andrew.eldermind.dto.ChatRequest;
 import com.andrew.eldermind.dto.ChatResponse;
 import com.andrew.eldermind.dto.RetrievalDecision;
 import com.andrew.eldermind.dto.FallbackReason;
-
+import com.andrew.eldermind.dto.OutputValidationResult;
 import com.andrew.eldermind.service.RetrievalConfidenceService;
+import com.andrew.eldermind.service.OutputValidatorService;
 import com.andrew.eldermind.service.ChatService;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
@@ -48,6 +49,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
     private final QueryAnalyzer queryAnalyzer;
     private final HybridRetriever hybridRetriever;
     private final RetrievalConfidenceService retrievalConfidenceService;
+    private final OutputValidatorService outputValidatorService;
 
 
     /**
@@ -96,7 +98,8 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             ChatService chatService,
             QueryAnalyzer queryAnalyzer,
             HybridRetriever hybridRetriever,
-            RetrievalConfidenceService retrievalConfidenceService
+            RetrievalConfidenceService retrievalConfidenceService,
+            OutputValidatorService outputValidatorService
     ) {
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
@@ -104,6 +107,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         this.queryAnalyzer = queryAnalyzer;
         this.hybridRetriever = hybridRetriever;
         this.retrievalConfidenceService = retrievalConfidenceService;
+        this.outputValidatorService = outputValidatorService;
     }
 
     /**
@@ -319,6 +323,60 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
          */
         String evidenceBlock = lorePromptAssembler.buildEvidenceBlock(evidence);
         ChatResponse response = loreLLMGateway.generateLoreAnswer(request, evidenceBlock);
+
+        // Output validation results will be logged separately in OutputValidatorService,
+        // which analyzes the generated answer in the context of retrieval confidence,
+        // fallback behavior, and retrieved evidence quality.
+        OutputValidationResult validationResult = outputValidatorService.validate(
+                latestUserQuery,
+                response.getReply(),
+                decision,
+                matches
+        );
+
+        // Log a warning if validation did not pass, along with detailed signals for debugging and monitoring.
+        if (!validationResult.isPassed()) {
+            log.warn("""
+                    === Output Validation Warning ===
+                    alignmentPassed={}
+                    confidencePassed={}
+                    fallbackPassed={}
+                    warnings={}
+                    """,
+                    validationResult.isAlignmentPassed(),
+                    validationResult.isConfidencePassed(),
+                    validationResult.isFallbackPassed(),
+                    validationResult.getWarnings()
+            );
+        }
+
+        // For transparency during development, we print out the validation results along with key retrieval signals.
+        System.out.println("""
+        === OUTPUT VALIDATION ===
+        Query: %s
+        Retrieval Used: %s
+        Confidence: %s
+        Fallback Reason: %s
+        Matches Count: %d
+
+        Passed: %s
+        Alignment Passed: %s
+        Confidence Passed: %s
+        Fallback Passed: %s
+        Warnings: %s
+        === OUTPUT VALIDATION END ===
+        """.formatted(
+                latestUserQuery,
+                decision.isRetrievalUsed(),
+                decision.getRetrievalConfidence(),
+                decision.getFallbackReason(),
+                matches == null ? 0 : matches.size(),
+                validationResult.isPassed(),
+                validationResult.isAlignmentPassed(),
+                validationResult.isConfidencePassed(),
+                validationResult.isFallbackPassed(),
+                validationResult.getWarnings()
+        ));
 
         /**
          * Step 7 (Optional): Attach visible source citations for UI display.
