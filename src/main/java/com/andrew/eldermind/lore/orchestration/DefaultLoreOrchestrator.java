@@ -8,15 +8,13 @@ import com.andrew.eldermind.dto.OutputValidationResult;
 import com.andrew.eldermind.service.RetrievalConfidenceService;
 import com.andrew.eldermind.service.OutputValidatorService;
 import com.andrew.eldermind.service.ChatService;
+import com.andrew.eldermind.service.LoreRequestLogger;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
 import com.andrew.eldermind.lore.retrieval.HybridRetriever;
 import com.andrew.eldermind.lore.retrieval.QueryAnalyzer;
 import com.andrew.eldermind.lore.gateway.LoreLLMGateway;
 import org.springframework.stereotype.Service;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -35,11 +33,8 @@ import java.util.List;
 @Service
 public class DefaultLoreOrchestrator implements LoreOrchestrator {
 
-    // Logger for logging purposes
-    private static final Logger log = LoggerFactory.getLogger(DefaultLoreOrchestrator.class);
-
     // Constants for configuration and threshold constant
-    private static final double DEFAULT_THRESHOLD = 0.15; // pick your gating value
+    private static final double DEFAULT_THRESHOLD = 0.30; // pick your gating value
 
     private static final int TOP_K = 4; // Small K to keep token usage low and results curated
 
@@ -50,6 +45,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
     private final HybridRetriever hybridRetriever;
     private final RetrievalConfidenceService retrievalConfidenceService;
     private final OutputValidatorService outputValidatorService;
+    private final LoreRequestLogger loreRequestLogger;
 
 
     /**
@@ -99,7 +95,8 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             QueryAnalyzer queryAnalyzer,
             HybridRetriever hybridRetriever,
             RetrievalConfidenceService retrievalConfidenceService,
-            OutputValidatorService outputValidatorService
+            OutputValidatorService outputValidatorService,
+            LoreRequestLogger loreRequestLogger
     ) {
         this.lorePromptAssembler = lorePromptAssembler;
         this.loreLLMGateway = loreLLMGateway;
@@ -108,38 +105,12 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         this.hybridRetriever = hybridRetriever;
         this.retrievalConfidenceService = retrievalConfidenceService;
         this.outputValidatorService = outputValidatorService;
+        this.loreRequestLogger = loreRequestLogger;
     }
 
     /**
-     * Logs retrieval decision metadata for observability.
-     * This gives us an explainable trail of why retrieval was used or skipped.
-     *
-     * NOTE: We intentionally truncate the query to avoid noisy logs and accidental PII leakage.
+     * Main orchestration method for answering a chat request with optional lore grounding.
      */
-    private void logDecision(RetrievalDecision decision, String query) {
-        if (decision == null) return;
-
-        String safeQuery = (query == null) ? "" : query.trim();
-        if (safeQuery.length() > 160) {
-            safeQuery = safeQuery.substring(0, 160) + "...";
-        }
-
-        log.info(
-            "RetrievalDecision attempted={} used={} matchedDocs={} topScore={} threshold={} confidence={} groundingLabel={} fallbackReason={} retrieverVersion={} query=\"{}\"",
-            decision.isRetrievalAttempted(),
-            decision.isRetrievalUsed(),
-            decision.getMatchedDocs(),
-            decision.getTopScore(),
-            decision.getThreshold(),
-            decision.getRetrievalConfidence(),
-            decision.getGroundingLabel(),
-            decision.getFallbackReason(),
-            decision.getRetrieverVersion(),
-            safeQuery
-        );
-    }
-
-    
     @Override
     public ChatResponse answer(ChatRequest request, boolean includeSources) {
 
@@ -167,7 +138,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setFallbackReason(FallbackReason.NO_KEYWORDS);
 
             setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
-            logDecision(decision, latestUserQuery); // Log the decision for observability
+            loreRequestLogger.logDecision(decision, latestUserQuery); // Log the decision for observability
             return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
@@ -194,13 +165,14 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
                 "about", "tell", "explain"
         );
 
+        // We define must-hit terms as keywords that are reasonably specific (length >= 3) and not in our generic stoplist.
         var mustHit = keywords.stream()
                 .map(String::toLowerCase)
                 .filter(token -> token.length() >= 3)
                 .filter(token -> !genericTerms.contains(token))
                 .collect(java.util.stream.Collectors.toSet());
 
-        System.out.println("[Gate] query=\"" + latestUserQuery + "\" mustHit=" + mustHit);
+        loreRequestLogger.logGate(latestUserQuery, mustHit); // Log the gate analysis for observability, including the extracted must-hit terms
 
         // If no must-hit terms remain, skip retrieval to avoid injecting irrelevant lore.
         if (mustHit.isEmpty()) {
@@ -211,7 +183,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
 
             setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
-            logDecision(decision, latestUserQuery); // Log the decision for observability
+            loreRequestLogger.logDecision(decision, latestUserQuery); // Log the decision for observability
             return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
@@ -225,6 +197,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
 
         try {
             matches = hybridRetriever.retrieveTopK(latestUserQuery, TOP_K);
+            loreRequestLogger.logRetrievalSummary(latestUserQuery, matches); // Log the retrieval summary for observability, including the number of matches and top match details
         } catch (Exception e) {
             decision.setRetrievalUsed(false);
             decision.setMatchedDocs(0);
@@ -232,7 +205,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setFallbackReason(FallbackReason.ERROR);
 
             setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
-            logDecision(decision, latestUserQuery); // Log the decision for observability, including the error
+            loreRequestLogger.logDecision(decision, latestUserQuery); // Log the decision for observability, including the error
             return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
@@ -246,7 +219,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setFallbackReason(FallbackReason.NO_MATCHES);
 
             setUngroundedDecisionMetadata(decision);
-            logDecision(decision, latestUserQuery);
+            loreRequestLogger.logDecision(decision, latestUserQuery); // Log the decision for observability, including the fallback reason
             return chatService.getChatResponse(request);
         }
 
@@ -267,7 +240,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setRetrievalUsed(false);
             decision.setFallbackReason(FallbackReason.NO_HARD_EVIDENCE);
             setUngroundedDecisionMetadata(decision); // Set default metadata for ungrounded decisions
-            logDecision(decision, latestUserQuery); // Log the decision for observability
+            loreRequestLogger.logDecision(decision, latestUserQuery); // Log the decision for observability
             return chatService.getChatResponse(request); // Fallback to chat-only response
         }
 
@@ -289,7 +262,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
             decision.setFallbackReason(FallbackReason.BELOW_THRESHOLD);
 
             setUngroundedDecisionMetadata(decision); 
-            logDecision(decision, latestUserQuery);
+            loreRequestLogger.logDecision(decision, latestUserQuery); // Log the decision for observability, including the gating outcome
             return chatService.getChatResponse(request);
         }
 
@@ -335,48 +308,12 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         );
 
         // Log a warning if validation did not pass, along with detailed signals for debugging and monitoring.
-        if (!validationResult.isPassed()) {
-            log.warn("""
-                    === Output Validation Warning ===
-                    alignmentPassed={}
-                    confidencePassed={}
-                    fallbackPassed={}
-                    warnings={}
-                    """,
-                    validationResult.isAlignmentPassed(),
-                    validationResult.isConfidencePassed(),
-                    validationResult.isFallbackPassed(),
-                    validationResult.getWarnings()
-            );
-        }
-
-        // For transparency during development, we print out the validation results along with key retrieval signals.
-        System.out.println("""
-        === OUTPUT VALIDATION ===
-        Query: %s
-        Retrieval Used: %s
-        Confidence: %s
-        Fallback Reason: %s
-        Matches Count: %d
-
-        Passed: %s
-        Alignment Passed: %s
-        Confidence Passed: %s
-        Fallback Passed: %s
-        Warnings: %s
-        === OUTPUT VALIDATION END ===
-        """.formatted(
-                latestUserQuery,
-                decision.isRetrievalUsed(),
-                decision.getRetrievalConfidence(),
-                decision.getFallbackReason(),
-                matches == null ? 0 : matches.size(),
-                validationResult.isPassed(),
-                validationResult.isAlignmentPassed(),
-                validationResult.isConfidencePassed(),
-                validationResult.isFallbackPassed(),
-                validationResult.getWarnings()
-        ));
+        loreRequestLogger.logValidation(
+        latestUserQuery,
+        decision,
+        validationResult,
+        matches == null ? 0 : matches.size()
+        );
 
         /**
          * Step 7 (Optional): Attach visible source citations for UI display.
@@ -390,7 +327,7 @@ public class DefaultLoreOrchestrator implements LoreOrchestrator {
         /**
          * Final step: Log successful retrieval decision for observability.
          */
-        logDecision(decision, latestUserQuery);
+        loreRequestLogger.logDecision(decision, latestUserQuery);
 
         return response;
     }

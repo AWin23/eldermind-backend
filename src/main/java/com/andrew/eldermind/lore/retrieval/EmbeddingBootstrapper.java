@@ -3,8 +3,13 @@ package com.andrew.eldermind.lore.retrieval;
 import com.andrew.eldermind.lore.corpus.LoreCorpusStore;
 import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.gateway.EmbeddingClient;
+import com.andrew.eldermind.service.EmbeddingStatusService;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -19,13 +24,22 @@ import java.util.List;
 @Component
 public class EmbeddingBootstrapper implements CommandLineRunner {
 
+    // Logger for monitoring the bootstrapping process
+    private static final Logger log =
+        LoggerFactory.getLogger(EmbeddingBootstrapper.class);
+
+    // Dependencies: corpus store to access documents, embedding client to compute vectors
     private final LoreCorpusStore corpusStore;
     private final EmbeddingClient embeddingClient;
+    private final EmbeddingStatusService embeddingStatusService;
+
 
     public EmbeddingBootstrapper(LoreCorpusStore corpusStore,
-                                 EmbeddingClient embeddingClient) {
+                                 EmbeddingClient embeddingClient,
+                                 EmbeddingStatusService embeddingStatusService) {
         this.corpusStore = corpusStore;
         this.embeddingClient = embeddingClient;
+        this.embeddingStatusService = embeddingStatusService;
     }
 
     @Override
@@ -36,21 +50,35 @@ public class EmbeddingBootstrapper implements CommandLineRunner {
                 .filter(doc -> doc.getEmbedding() == null || doc.getEmbedding().isEmpty())
                 .count();
 
-        System.out.println("[EmbeddingBootstrapper] corpus size=" + corpus.size()
-                + " missingEmbeddings=" + missing);
-
+        log.info("==================================================");
+        log.info(
+            "EmbeddingBootstrapper corpusSize={} missingEmbeddings={}",
+            corpus.size(),
+            missing
+        );
+        log.info("==================================================");
+        
         for (LoreDocument doc : corpus) {
             if (doc.getEmbedding() != null && !doc.getEmbedding().isEmpty()) continue;
-
+            
             // Use a compact but informative input for the doc vector.
             String input = (safe(doc.getTitle()) + "\n\n" + safe(doc.getText())).trim();
-
+            
             // Call embeddings API once per doc
             doc.setEmbedding(embeddingClient.embed(input));
         }
+        
+        // Final log after bootstrapping to confirm all embeddings are set
+        log.info("==================================================");
+        log.info(
+            "EmbeddingBootstrapper done embeddedDocs={}",
+            corpus.size()
+    );
+    log.info("==================================================");
 
-        System.out.println("[EmbeddingBootstrapper] done. embeddedDocs=" + corpus.size());
-    }
+    // Mark embeddings as ready so retrieval can proceed
+    embeddingStatusService.markReady();
+}
 
     private String safe(String s) {
         return (s == null) ? "" : s;

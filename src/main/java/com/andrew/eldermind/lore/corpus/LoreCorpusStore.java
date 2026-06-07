@@ -2,6 +2,9 @@ package com.andrew.eldermind.lore.corpus;
 
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -23,7 +26,9 @@ public class LoreCorpusStore {
         // Load once during bean construction (startup-time)
         this.corpus = loader.load();
 
-        System.out.println("[LoreCorpusStore] loaded corpus size=" + corpus.size());
+        // Sanity check log to confirm corpus loaded correctly
+        Logger log = LoggerFactory.getLogger(LoreCorpusStore.class);
+        log.info("LoreCorpusStore loaded corpusSize={}", corpus.size());
     }
 
     public List<LoreDocument> getCorpus() {

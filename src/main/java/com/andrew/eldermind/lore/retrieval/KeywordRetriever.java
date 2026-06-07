@@ -6,6 +6,9 @@ import com.andrew.eldermind.lore.corpus.LoreCorpusStore;
 
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,6 +21,9 @@ import java.util.stream.Collectors;
 @Service
 public class KeywordRetriever implements LoreRetriever {
 
+    //-- DEV NOTE: This is a very basic retriever for v1, focused on keyword matching.
+    private static final Logger log = LoggerFactory.getLogger(KeywordRetriever.class);
+
     private final List<LoreDocument> corpus;
     private final QueryAnalyzer queryAnalyzer;
 
@@ -29,18 +35,30 @@ public class KeywordRetriever implements LoreRetriever {
         this.corpus = corpusStore.getCorpus();
         this.queryAnalyzer = queryAnalyzer;
 
-        // --- Startup sanity check (dev-only) ---
-        System.out.println("=== Lore Corpus Startup Check ===");
-        System.out.println("Loaded lore corpus size: " + this.corpus.size());
+        // Startup sanity check
+        log.info("==================================================");
+        log.info(
+                "KeywordRetriever loaded corpusSize={}",
+                this.corpus.size()
+        );
+        log.info("==================================================");
 
         if (!this.corpus.isEmpty()) {
             LoreDocument first = this.corpus.get(0);
-            System.out.println("First doc id: " + first.getId());
-            System.out.println("First doc title: " + first.getTitle());
-            System.out.println("First doc text preview: "
-                    + safe(first.getText()).substring(0, Math.min(80, safe(first.getText()).length())));
+
+            log.debug(
+                    "KeywordRetriever firstDoc id={} title=\"{}\" preview=\"{}\"",
+                    first.getId(),
+                    first.getTitle(),
+                    safe(first.getText()).substring(
+                            0,
+                            Math.min(80, safe(first.getText()).length())
+                    )
+            );
         } else {
-            System.out.println("WARNING: corpus is empty. Check resources path lore/lore_corpus.json");
+            log.warn(
+                    "KeywordRetriever corpus is empty. Check resources path lore/lore_corpus.json"
+            );
         }
     }
 
@@ -58,14 +76,19 @@ public class KeywordRetriever implements LoreRetriever {
                 .collect(Collectors.toList());
 
         // --- Step C: DEBUG LOGGING (Sprint 2 dev only) ---
-        System.out.println("=== Lore Retrieval Debug ===");
-        System.out.println("Query: " + query);
-        System.out.println("Keywords: " + keywords);
+                log.debug(
+                "KeywordRetriever query=\"{}\" keywords={} candidates={}",
+                safe(query),
+                keywords,
+                scoredDocs.size()
+        );
+
         scoredDocs.stream().limit(k).forEach(s ->
-                System.out.println(
-                        "Candidate: " + s.doc().getId()
-                        + " | title=" + s.doc().getTitle()
-                        + " | score=" + s.score()
+                log.debug(
+                        "KeywordCandidate id={} title=\"{}\" score={}",
+                        s.doc().getId(),
+                        s.doc().getTitle(),
+                        s.score()
                 )
         );
 

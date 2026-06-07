@@ -4,6 +4,9 @@ import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class HybridRetriever implements LoreRetriever {
+
+    // Defensive logging for debugging hybrid scoring behavior.
+    private static final Logger log = LoggerFactory.getLogger(HybridRetriever.class);
 
     // Optional: if you want to keep more debug info per doc during merge, you can use this class.
     private static class HybridScoreRow {
@@ -193,35 +199,38 @@ public class HybridRetriever implements LoreRetriever {
                 .collect(Collectors.toList());
 
         // 4) Rich hybrid debug logging
+        // Keep this inside HybridRetriever because these are retrieval-scoring internals.
+        // Use debug-level logs so normal app output stays clean unless debugging is enabled.
         if (!rankedRows.isEmpty()) {
-            System.out.println(
-                    "[HybridRetriever] query=\"" + query + "\" " +
-                    "candidates=" + mergedById.size() + " " +
-                    "topFinal=" + round(rankedRows.get(0).finalScore) + " " +
-                    "topKwRaw=" + round(topScore(keywordMatches)) + " " +
-                    "topEmb=" + round(topScore(embeddingMatches))
+            log.debug(
+                    "HybridRetriever query=\"{}\" candidates={} topFinal={} topKwRaw={} topEmb={}",
+                    safeQuery(query),
+                    mergedById.size(),
+                    round(rankedRows.get(0).finalScore),
+                    round(topScore(keywordMatches)),
+                    round(topScore(embeddingMatches))
             );
 
             for (int i = 0; i < rankedRows.size(); i++) {
                 HybridScoreRow row = rankedRows.get(i);
 
-                System.out.println(
-                        "  rank=" + (i + 1) +
-                        " id=" + safeId(row.doc) +
-                        " | title=" + safe(row.doc.getTitle())
-                );
-
-                System.out.println(
-                        "    kwRaw=" + round(row.keywordRaw) +
-                        " kwNorm=" + round(row.keywordNorm) +
-                        " emb=" + round(row.embeddingScore) +
-                        " final=" + round(row.finalScore)
+                log.debug(
+                        "HybridRetrieverRank rank={} id={} title=\"{}\" kwRaw={} kwNorm={} emb={} final={}",
+                        i + 1,
+                        safeId(row.doc),
+                        safe(row.doc.getTitle()),
+                        round(row.keywordRaw),
+                        round(row.keywordNorm),
+                        round(row.embeddingScore),
+                        round(row.finalScore)
                 );
             }
         } else {
-            System.out.println(
-                    "[HybridRetriever] query=\"" + query + "\" no results " +
-                    "(kw=" + keywordMatches.size() + ", emb=" + embeddingMatches.size() + ")"
+            log.debug(
+                    "HybridRetriever query=\"{}\" no results kw={} emb={}",
+                    safeQuery(query),
+                    keywordMatches.size(),
+                    embeddingMatches.size()
             );
         }
 
@@ -229,6 +238,21 @@ public class HybridRetriever implements LoreRetriever {
         return rankedRows.stream()
                 .map(row -> new LoreMatch(row.doc, row.finalScore))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * * Safely handle null or excessively long queries for debug logging.
+     **/
+    private String safeQuery(String query) {
+        if (query == null) return "";
+
+        String safeQuery = query.trim();
+
+        if (safeQuery.length() > 160) {
+            safeQuery = safeQuery.substring(0, 160) + "...";
+        }
+
+        return safeQuery;
     }
 
     /**

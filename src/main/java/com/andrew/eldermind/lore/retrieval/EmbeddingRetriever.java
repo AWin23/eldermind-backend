@@ -4,9 +4,14 @@ import com.andrew.eldermind.lore.corpus.LoreDocument;
 import com.andrew.eldermind.lore.corpus.LoreMatch;
 
 import com.andrew.eldermind.lore.gateway.EmbeddingClient;
+import com.andrew.eldermind.service.EmbeddingStatusService;
+
 import org.springframework.stereotype.Service;
 
 import com.andrew.eldermind.lore.corpus.LoreCorpusStore;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Comparator;
 import java.util.List;
@@ -33,18 +38,26 @@ import java.util.stream.Collectors;
 @Service
 public class EmbeddingRetriever implements LoreRetriever {
 
+    // Logger for monitoring the bootstrapping process
+    private static final Logger log =
+        LoggerFactory.getLogger(EmbeddingRetriever.class);
+
     // In-Memory lore corpus used for retrieval.
     private final List<LoreDocument> corpus;
 
     // External gateway to generate embeddings (query-time).
     private final EmbeddingClient embeddingClient;
 
-    public EmbeddingRetriever(LoreCorpusStore corpusStore, EmbeddingClient embeddingClient) {
+    // Service to track embedding readiness status
+    private final EmbeddingStatusService embeddingStatusService;
+
+    public EmbeddingRetriever(LoreCorpusStore corpusStore, EmbeddingClient embeddingClient, EmbeddingStatusService embeddingStatusService) {
 
         // Loads corpus into memory at startup.
         // This keeps retrieval fast and avoids re-reading JSON on every request.
         this.corpus = corpusStore.getCorpus();
         this.embeddingClient = embeddingClient;
+        this.embeddingStatusService = embeddingStatusService;
     }
 
     /**
@@ -56,6 +69,20 @@ public class EmbeddingRetriever implements LoreRetriever {
      */
     @Override
     public List<LoreMatch> retrieveTopK(String query, int k) {
+
+
+        // Prevent retrieval from running against a partially-built embedding corpus.
+        // During startup, EmbeddingBootstrapper may still be generating vectors.
+        // Returning an empty list allows the orchestrator to cleanly fallback.
+        if (!embeddingStatusService.isReady()) {
+
+            log.warn(
+                "EmbeddingRetriever called before bootstrap complete query=\"{}\"",
+                query
+            );
+
+            return List.of();
+        }
 
         // ------------------------------------------------------------
         // 1) Embed the user's query (runtime cost per request)
@@ -81,9 +108,21 @@ public class EmbeddingRetriever implements LoreRetriever {
 
         
         // --- DEV LOGGING: check corpus and embedding availability ---
-        System.out.println("[EmbeddingRetriever] corpus size=" + corpus.size());
-        long embeddedCount = corpus.stream().filter(this::hasEmbedding).count();
-        System.out.println("[EmbeddingRetriever] docs with embeddings=" + embeddedCount);
+        long embeddedCount = corpus.stream()
+        .filter(this::hasEmbedding)
+        .count();
+
+        log.info("==================================================");
+        log.info(
+                "EmbeddingRetriever.retrieveTopK query=\"{}\" corpusSize={} embeddedDocs={} returnedMatches={}",
+                query,
+                corpus.size(),
+                embeddedCount,
+                scored.size()
+        );
+        log.info("==================================================");
+
+        embeddingStatusService.markReady(); // Mark embeddings as ready after first retrieval attempt (for testing/logging)
 
         // ------------------------------------------------------------
         // 3) Fallback behavior
